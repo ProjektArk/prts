@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name": "뱅가드 분대",
+        "score": 2,
+        "title": "뱅가드 오퍼레이터를 지정/금지 합니다.",
+        "description": "설명문이 들어가는부분",
+        "restrict": {
+            "operators": [],
+            "position": 1,
+            "rarity": -1,
+            "costUpper": -1,
+            "costLower": -1
+        }
+    },
+    {
+        "id": 2,
+        "name": "2성 오퍼레이터",
+        "score": 3,
+        "title": "2성 오퍼레이터를 지정/금지 합니다.",
+        "description": "설명문이 들어가는부분",
+        "restrict": {
+            "operators": [1, 5, 6],
+            "positions": -1,
+            "rarity": 2,
+            "costUpper": -1,
+            "costLower": -1
+        }
+    },
+    {
+        "id": 3,
+        "name": "잡탕 오퍼레이터",
+        "score": 1,
+        "title": "잡탕 오퍼레이터 아무거나 지정/금지 합니다.",
+        "description": "설명문이 들어가는부분",
+        "restrict": {
+            "operators": [1, 3, 6, 7],
+            "positions": -1,
+            "rarity": -1,
+            "costUpper": -1,
+            "costLower": -1
+        }
+    }
+]

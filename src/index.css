@@ -1,0 +1,659 @@
+/* 기본 설정 */
+* {
+  margin: 0;
+  padding: 0;
+  --white-line-color: rgb(255, 255, 255, 0.2);
+  --white-radio-color: rgb(255, 255, 255, 0.5);
+  --white-line-color-ft: rgb(255, 255, 255, 0.16);
+  --black-bg-color: rgb(0, 0, 0, 0.4);
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+input:focus {
+  outline: none;
+}
+
+#extra {
+  position: fixed;
+  background-image: url("images/img_background.gif");
+  background-size: cover;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  width: 100%;
+  height: 100%;
+  opacity: 0.2;
+  z-index: -1;
+  animation: backgroundFade 5s;
+  animation: zoom 30s infinite;
+}
+
+@keyframes backgroundFade {
+  0% {opacity: 0; }
+  100% {opacity: 0.2; }
+}
+
+@keyframes zoom {
+  0% { transform: scale(1.0); }
+  50% { transform: scale(1.2); }
+  100% {transform: scale(1.0); }
+}
+
+.wrapper {
+   min-height: 100%;
+   margin: 0 auto -150px;
+}
+
+/* 헤더 설정 */
+header {
+  width: 100%;
+  min-width: 1200px;
+  height: 130px;
+  border-bottom: 2px solid var(--white-line-color);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.header-menu {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 850px;
+  min-width: 850px;
+}
+
+.title-logo {
+  margin-left: 50px;
+  width: 110px;
+  height: 110px;
+}
+
+.menu-a {
+  cursor: pointer;
+  color: white;
+  font-size: 30px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 600;
+  border-bottom: 3px solid transparent;
+  transition: 0.3s;
+}
+
+.menu-a:hover {
+  border-bottom: 3px solid white;
+}
+
+#header-hyperlinks {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-left: 30px;
+  min-width: 300px;
+}
+
+#header-hyperlinks a {
+  font-size: 0;
+}
+
+.header-hyperlink {
+  width: 110px;
+  height: 110px;
+}
+#hyperlink-ark {
+  width: 100px;
+  height: 100px;
+}
+
+#hyperlink-minase {
+  width: 90px;
+  height: 100px;
+  margin-left: 15px;
+}
+
+#hyperlink-donkey {
+  width: 122px;
+  height: 122px;
+  margin-bottom: -5px;
+}
+
+.menu-hyperlink img {
+  width: 110px;
+  height: 110px;
+  margin: 5px;
+}
+
+.mid-wrapper {
+  width: 1200px;
+  height: 100%;
+  margin-top: 60px;
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content-deco-1, .content-deco-2 {
+  display: inline-block;
+  background-color: var(--white-line-color);
+  border-radius: 20px;
+  height: 534px;
+  margin-right: 2px;
+}
+
+.content-deco-1 {
+  width: 20px;
+  margin-right: 4px;
+}
+
+.content-deco-2 {
+  width: 8px;
+  margin-right: 10px;
+}
+
+/* 푸터 설정 */
+footer {
+  position: relative;
+  width: 100%;
+  min-width: 1200px;
+  height: 150px;
+  background: linear-gradient(transparent 0%, var(--white-line-color-ft) 70%);
+}
+
+.footer-text {
+  position: absolute;
+  display: inline-block;
+  top: 70px;
+  left: 20px;
+  font-family: "Noto Sans KR", sans-serif;
+  color: white;
+}
+
+#banner-list {
+  position: absolute;
+  display: inline-block;
+  top: 20px;
+  right: 10px;
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+}
+
+.layout-pusher {
+  background-color: transparent;
+  height: 150px;
+}
+
+::-webkit-scrollbar { width: 18px; }
+::-webkit-scrollbar-track { background-color: black;  }
+::-webkit-scrollbar-corner { background-color: black;  }
+::-webkit-scrollbar-thumb {
+  margin: 2px;
+  background-color: var(--white-line-color);
+  border-radius: 10px;
+ }
+
+/* 탬플릿 CSS */
+/* content : 레이아웃에서 사각형 메뉴를 만들 때 사용 */
+.content {
+  display: inline-block;
+  color: white;
+  background-color: var(--black-bg-color);
+  border: 2px solid var(--white-line-color);
+  border-radius: 20px;
+  padding: 15px 15px 15px 15px;
+}
+
+/* title : 레이아웃에서 제목을 만들 때 사용 */
+.title {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  font-size: 28px;
+  padding-bottom: 8px;
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  border-bottom: 2px solid var(--white-line-color);
+}
+
+ /* 개발자 메뉴 CSS */
+ .content.create {
+   width: 1150px;
+   height: 500px;
+ }
+
+.content.create .tabs {
+  position: absolute;
+  transform: translateY(-48px);
+}
+.content.create .tabs .tab-item {
+  background-color: gray;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-family: "Noto Sans KR", sans-serif;
+  padding: 4px 16px;
+  margin-right: 3px;
+  transition: 0.3s;
+  border-radius: 2px 12px 2px 2px;
+  color: lightgray;
+  font-size: 16px;
+}
+.content.create .tabs .tab-item.selected {
+  background-color: orange;
+  color: white;
+}
+
+ .content.dev {
+   width: 900px;
+   height: 500px;
+   text-align: center;
+ }
+
+ .dev-title {
+   display: inline-block;
+   width: 850px;
+   text-align: center;
+   padding-top: 20px;
+   padding-bottom: 20px;
+   font-size: 66px;
+   font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+   font-weight: 900;
+   text-shadow: 0px 0px 20px white;
+   animation: shine 10s infinite;
+   border-bottom: 2px solid var(--white-line-color);
+ }
+
+ .dev-content {
+   display: grid;
+   grid-template-columns: 400px 280px 120px;
+   text-align: left;
+   padding: 50px;
+   height: 270px;
+   font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+   font-weight: 400;
+   font-size: 32px;
+ }
+
+.dev-content a {
+  transition: 0.3s;
+}
+
+ .dev-content a:hover {
+   text-shadow: 0px 0px 10px white;
+   font-weight: 800;
+ }
+
+ @keyframes shine {
+   0% {text-shadow: 0px 0px 5px white; }
+   50% {text-shadow: 0px 0px 15px white; }
+   100% {text-shadow: 0px 0px 5px white; }
+ }
+
+/* 작전 기록 CSS */
+.content.record-left {
+  width: 820px;
+  height: 500px;
+  margin-right: 15px;
+  display: grid;
+  grid-template-columns: 1fr 0.58fr 0.68fr;
+  grid-template-rows: 114fr 390fr 337fr;
+  grid-template-areas:
+    "title author date"
+    "info info restriction"
+    "info info score";
+  grid-gap: 15px;
+  text-align: left;
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+}
+
+.content.record-right {
+  width: 281px;
+  height: 500px;
+}
+
+.record-title {
+  grid-area: title;
+  margin-left: 20px;
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR";
+  font-weight: 600;
+  font-size: 26px;
+  display: table-cell;
+  overflow: visible;
+}
+
+.record-author {
+  font-size: 16px;
+  color: gray;
+  white-space: nowrap;
+  margin-top: 18px;
+  overflow: visible;
+}
+
+.record-date {
+  font-size: 16px;
+  margin-top: 18px;
+  color: gray;
+}
+
+.content.record-info {
+  grid-area: info;
+  position: relative;
+}
+
+.content.record-restriction {
+  grid-area: restriction;
+}
+
+.content.record-score {
+  grid-area: score;
+}
+
+.title.record-info {
+  text-align: left;
+}
+
+.record-opnumber {
+  position: absolute;
+  right: 15px;
+  top: 30px;
+  font-size: 16px;
+  text-align: right;
+  color: gray;
+}
+
+.data-record-info {
+  width: 100%;
+  height: 340px;
+  position: relative;
+}
+
+.warning-msg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 400px;
+  height: 300px;
+  text-align: center;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.warning-image {
+  width: 150px;
+  height: 150px;
+}
+
+.warning-text {
+  font-size: 16px;
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-weight: 100;
+}
+
+.warning-msg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 280px;
+  height: 250px;
+  text-align: center;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.data-record-restriction {
+  width: 100%;
+  height: 120px;
+}
+
+.data-record-score {
+  width: 100%;
+  height: 60px;
+  font-size: 60px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.data-record-list {
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+  height: 435px;
+  overflow: auto;
+}
+
+.data-record-list::-webkit-scrollbar { width: 8px; }
+
+.data-record-list div {
+  position: relative;
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  border: 2px solid var(--white-line-color);
+  padding: 3px;
+  font-size: 20px;
+  cursor: pointer;
+  height: 50px;
+  transition: 0.3s;
+}
+
+.data-record-list div:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  transition: 0.3s;
+  background: linear-gradient(to right, var(--white-line-color) 40%, transparent 100%);
+}
+
+.data-record-list div:hover:before {
+  opacity: 1;
+}
+
+/* 도움말 CSS */
+.help-box {
+  position: relative;
+  width: 1000px;
+  height: 562.5px;
+  color: white;
+  background-color: black;
+  box-shadow: 0px 0px 70px rgb(150, 150, 150, 0.5);
+}
+
+.image-stage {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.image-slide {
+  display: flex;
+  width: 800%;
+  height: 100%;
+  transition: 0.3s;
+}
+
+.image-slide img {
+  width: 1000px;
+  height: 562.5px;
+}
+
+.arrow_left {
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateX(-100%) translateY(-50%);
+  animation: buttonLeftMove 2.5s infinite;
+}
+
+.arrow_right {
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateX(100%) translateY(-50%);
+  animation: buttonRightMove 2.5s infinite;
+}
+
+@keyframes buttonLeftMove {
+  0% { left: -20px; }
+  50% { left: -28px; }
+  100% { left: -20px; }
+}
+
+@keyframes buttonRightMove {
+  0% { right: -20px; }
+  50% { right: -28px; }
+  100% { right: -20px; }
+}
+
+.slide-radio-menu {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  transform: translateX(-50%);
+  top: 15px;
+  left: 50%;
+  width: 180px;
+}
+
+.slide-radio-button {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--white-radio-color);
+  border-radius: 100%;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.slide-radio-button:hover {
+  border: 2px solid white;
+  box-shadow: 0px 0px 10px white;
+}
+
+.slide-radio-button.activated {
+  background-color: white;
+  box-shadow: 0px 0px 10px white;
+}
+
+/* 각종 부속 CSS */
+.d_ib {
+  display: inline-block;
+}
+.d_if {
+  display: inline-flex;
+}
+.d_a {
+  display: absolute;
+}
+.w_30 {
+  width: 30%;
+}
+.w_50 {
+  width: 50%;
+}
+.w_100 {
+  width: 100%;
+}
+.h_100 {
+  height: 100%;
+}
+.v_top {
+  vertical-align: top;
+}
+.v_middle {
+  vertical-align: middle;
+}
+.v_sub {
+  vertical-align: sub;
+}
+.t_center {
+  text-align: center;
+  text-align: -webkit-center;
+}
+.p_1 {
+  padding: 3px;
+}
+.p_2 {
+  padding: 5px;
+}
+.p_3 {
+  padding: 10px;
+}
+.p_4 {
+  padding: 20px;
+}
+.pt_1 {
+  padding-top: 3px;
+}
+.pt_2 {
+  padding-top: 5px;
+}
+.m_1 {
+  margin: 3px;
+}
+.m_2 {
+  margin: 5px;
+}
+.mt_1 {
+  margin-top: 3px;
+}
+.mt_2 {
+  margin-top: 5px;
+}
+.mt_3 {
+  margin-top: 10px;
+}
+.mt_4 {
+  margin-top: 20px;
+}
+.mb_1 {
+  margin-bottom: 3px;
+}
+.mb_2 {
+  margin-bottom: 5px;
+}
+.mb_3 {
+  margin-bottom: 10px;
+}
+.mb_4 {
+  margin-bottom: 20px;
+}
+.f_right {
+  float: right;
+}
+.c_pointer {
+  cursor: pointer;
+}
+.lh_100 {
+  line-height: 100%;
+}
+.border {
+  border: 1px solid var(--white-line-color) !important;
+}
