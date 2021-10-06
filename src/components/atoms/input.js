@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ButtonGroup } from './button';
 
 export const InputText = (props) => <StyledText type="text" className="input-text" {...props} />;
 export const InputSlider = (props) => (

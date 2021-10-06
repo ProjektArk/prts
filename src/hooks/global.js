@@ -19,11 +19,11 @@ export const GlobalProvider = ({ children }) => {
     const records = JSON.parse(localStorage.getItem('records') || JSON.stringify([]));
     records.push(
       record
-        .set('created_at', Date.now())
         .updateIn(
           ['default', 'title'],
           (title) => title || _.get(randomTitles, _.random(randomTitles.length - 1)),
         )
+        .set('created_at', Date.now())
         .toJS(),
     );
     localStorage.setItem('records', JSON.stringify(records));

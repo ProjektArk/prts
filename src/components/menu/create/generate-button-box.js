@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import { fromJS } from 'immutable';
+import _ from 'lodash';
 import { useGlobal } from '../../../hooks/global';
 import Box from '../../atoms/box';
 import { ButtonGenerate } from '../../atoms/button';
 import { InputText } from '../../atoms/input';
+import operators from '../../../static/database/master/operators.json';
 
 const GenerateButtonBox = (props) => {
   const { setting, selected, setSetting, resetSetting } = props;
   const { setRecord } = useGlobal();
+
   const handleSetting = React.useCallback(
     ({ target }) => {
       const { id, value, type, checked } = target;
@@ -18,6 +22,22 @@ const GenerateButtonBox = (props) => {
     },
     [setSetting],
   );
+
+  const getRandomizedOpers = () => {
+    const allOperatorIds = fromJS(operators.map((operator) => operator.id));
+    const subtracted = allOperatorIds.toSet().subtract(setting.get('restrict').toSet());
+    const randomOpers = [];
+
+    const limit = setting.getIn(['default', 'operatorLimit']);
+
+    while (randomOpers.length < limit) {
+      const gotRandomOper = subtracted.get(_.random(subtracted.size));
+      !randomOpers.includes(gotRandomOper) ? randomOpers.push(gotRandomOper) : console.log(111);
+    }
+
+    return randomOpers;
+  };
+
   return (
     <Styled>
       {selected == 1 && (
@@ -41,15 +61,16 @@ const GenerateButtonBox = (props) => {
       )}
       <ButtonGenerate
         onClick={() => {
-          setRecord(setting);
           resetSetting();
+          const operators = getRandomizedOpers();
+          setRecord(setting.set('operators', operators));
         }}
       />
     </Styled>
   );
 };
 const StyledBox = styled(Box)`
-  height: 150px;
+  ${({ long }) => (long ? 'height: 465px;' : 'height: 150px;')}
   width: 88%;
   text-align: center;
   span {

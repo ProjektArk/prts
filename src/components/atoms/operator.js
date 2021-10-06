@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import _ from 'lodash';
+import React from 'react';
 import positions from '../../static/database/master/positions.json';
 import { getRestrictScore } from '../static';
+import Image from './img';
 
 const Operator = (props) => {
   const { operator, onMouseEnter, ...otherProps } = props;
@@ -26,11 +28,12 @@ const Operator = (props) => {
         )}
       </div>
       <div>
-        <img
-          src={require('../../images/icons/icon_ui/icon_caster.png').default}
-          alt=""
-          aria-hidden
-        />
+        {operator.get('thumbnail') && (
+          <img
+            src={require(`../../images/icons/icon_cha/${operator.get('thumbnail')}`).default}
+            alt=""
+          />
+        )}
       </div>
       <div className="name">{operator.get('name')}</div>
     </StyledOperator>

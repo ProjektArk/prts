@@ -5,8 +5,7 @@ import { initSetting } from '../../static';
 import Tabs from './tabs';
 import GenerateButtonBox from './generate-button-box';
 
-const Create = (props) => {
-  const { setTemp } = props;
+const Create = () => {
   const [selected, setSelected] = React.useState(1);
   const [setting, setSetting] = React.useState(fromJS(initSetting));
 
@@ -41,9 +40,8 @@ const Create = (props) => {
             <GenerateButtonBox
               setting={setting}
               setSetting={setSetting}
-              resetSetting={resetSetting}
               selected={selected}
-              setTemp={setTemp}
+              resetSetting={resetSetting}
             />
           </div>
         </div>

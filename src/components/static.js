@@ -53,8 +53,8 @@ export const initSetting = {
     },
     title: '',
   },
+  operators: [],
   restrict: [],
-  additional: {},
   score: 0,
   created_at: 0,
 };

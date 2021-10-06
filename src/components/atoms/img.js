@@ -1,12 +1,6 @@
-import _ from 'lodash';
-
-const Img = (props) => {
+const Image = (props) => {
   const { src, alt } = props;
-  return (
-    <img
-      src={require(`../../images/${_.get(src, 0) === '/' ? src.slice(1) : src}`).default}
-      alt={alt}
-    />
-  );
+  return <img src={require('../../images/icons/icon_cha/' + src).default} alt={alt} />;
 };
-export default Img;
+
+export default Image;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { fromJS, Set } from 'immutable';
+import { fromJS } from 'immutable';
 import _ from 'lodash';
 import cx from 'classnames';
 import styled from 'styled-components';
@@ -15,7 +15,7 @@ import { getRestrictScore } from '../../../static';
 const Restrict = (props) => {
   const { setting, setSetting } = props;
   const [operatorsMaster, setOperatorsMaster] = React.useState(fromJS(operatorsData));
-  const [restrictsMaster, setRestrictMaster] = React.useState(fromJS(restrictsData));
+  const [restrictsMaster] = React.useState(fromJS(restrictsData));
   const [mode, setMode] = React.useState('allowed');
   const [searchTab, setSearchTab] = React.useState('operator');
   const [search, setSearch] = React.useState('');
