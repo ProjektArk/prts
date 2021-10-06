@@ -43,11 +43,11 @@ const Item = (props) => {
     props.href ? (
       <div>
         <a href={props.href} target="_blank" rel="noreferrer">
-          {props.gallog && <Img src="/icons/dc.png" alt={props.href} />}
-          {props.youtube && <Img src="/icons/youtube.png" alt={props.href} />}
-          {props.twitter && <Img src="/icons/twitter.png" alt={props.href} />}
-          {props.facebook && <Img src="/icons/facebook.png" alt={props.href} />}
-          {props.email && <Img src="/icons/email.png" alt={props.href} />}
+          {props.gallog && <Img src="icons/dc.png" alt={props.href} />}
+          {props.youtube && <Img src="icons/youtube.png" alt={props.href} />}
+          {props.twitter && <Img src="icons/twitter.png" alt={props.href} />}
+          {props.facebook && <Img src="icons/facebook.png" alt={props.href} />}
+          {props.email && <Img src="icons/email.png" alt={props.href} />}
         </a>
       </div>
     ) : (

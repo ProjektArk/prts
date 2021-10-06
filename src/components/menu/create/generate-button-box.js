@@ -32,7 +32,7 @@ const GenerateButtonBox = (props) => {
 
     while (randomOpers.length < limit) {
       const gotRandomOper = subtracted.get(_.random(subtracted.size));
-      !randomOpers.includes(gotRandomOper) ? randomOpers.push(gotRandomOper) : console.log(111);
+      !randomOpers.includes(gotRandomOper) && randomOpers.push(gotRandomOper);
     }
 
     return randomOpers;
