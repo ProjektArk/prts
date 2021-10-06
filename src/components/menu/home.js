@@ -2,7 +2,6 @@ import { fromJS } from 'immutable';
 import React from 'react';
 import styled from 'styled-components';
 import base64 from 'base-64';
-import _ from 'lodash';
 import { initSetting } from '../static';
 import { useGlobal } from '../../hooks/global';
 
@@ -12,8 +11,7 @@ const Today = () => {
   const { current: todayString } = React.useRef(
     `${today.getFullYear()}${today.getMonth() + 1}${`0${today.getDate()}`.slice(-2)}`,
   );
-
-  const [todayRecord, setTodayRecord] = React.useState(
+  const { current: todayRecord } = React.useRef(
     fromJS(initSetting).setIn(['default', 'title'], todayString),
   );
 

@@ -64,6 +64,7 @@ header {
   min-width: 1200px;
   height: 130px;
   border-bottom: 2px solid var(--white-line-color);
+  padding-bottom: 10px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -139,7 +140,7 @@ header {
 .mid-wrapper {
   width: 1200px;
   height: 100%;
-  margin-top: 60px;
+  margin-top: 50px;
   margin-bottom: 40px;
   margin-left: auto;
   margin-right: auto;
@@ -267,7 +268,7 @@ footer {
 }
 
  .content.dev {
-   width: 900px;
+   width: 1200px;
    height: 500px;
    text-align: center;
  }
@@ -288,22 +289,28 @@ footer {
 
  .dev-content {
    display: grid;
-   grid-template-columns: 400px 280px 120px;
+   grid-template-columns: 35% 30% 25%;
    text-align: left;
    padding: 50px;
    height: 270px;
    font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
    font-weight: 400;
    font-size: 32px;
- }
-
+   vertical-align: middle;
+  }
+  .dev-content div {
+    height: 100%;
+    padding: 0;
+    align-items: center;
+  }
 .dev-content a {
-  transition: 0.3s;
+  line-height: 100%;
+  transition: 0.1s;
+  font-size: 15pt;
 }
 
  .dev-content a:hover {
-   text-shadow: 0px 0px 10px white;
-   font-weight: 800;
+   text-shadow: 0px 0px 5px white;
  }
 
  @keyframes shine {
