@@ -1,31 +1,57 @@
 import React, { useState } from 'react';
+import _ from 'lodash';
 import warninglogo from '../../images/icons/icon_ui/icon_ui_warning-bg.png';
+import { useGlobal } from '../../hooks/global';
 
 const Record = () => {
-  const [data, setData] = useState(JSON.parse(localStorage.getItem('records')));
+  const { records } = useGlobal();
   const [_id, setId] = useState(-1);
-  const changeId = (value) => {
-    setId(value);
-  };
-  console.log(data); // For Test
 
-  const selectMenuArray = [];
-  if (data !== null) {
-    for (let i = 0; i < data.length; i++) {
-      selectMenuArray.push(data[i]['default']['title']);
-    }
-  }
-  console.log('Test: ' + selectMenuArray);
+  const convertToDate = (data) => {
+    const date = new Date(data);
+    const year = date.getYear() + 1900;
+    const month = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
+    const day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
+    const hour = date.getHours() > 9 ? date.getHours() : '0' + date.getHours();
+    const min = date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes();
+    const sec = date.getSeconds() > 9 ? date.getSeconds() : '0' + date.getSeconds();
+    return year + '.' + month + '.' + day + ' ' + hour + ':' + min + ':' + sec;
+  };
+
+  let selectMenuArray = [];
+  records.forEach((data, index) => {
+    selectMenuArray.push([
+      _.get(records[index], 'default.title'),
+      _.get(records[index], 'created_at'),
+    ]);
+  });
 
   const SelectMenu = (props) => {
+    const ListItem = (props) => (
+      <div
+        className="list-block"
+        key={props.blockId}
+        role="button"
+        onClick={() => setId(props.blockId)}
+        aria-hidden
+      >
+        <p className="op-name">{'작전명: ' + props.opName}</p>
+        <p className="op-date">{'작전 일자 ' + props.opDay}</p>
+      </div>
+    );
+
     let dataList = [];
-    for (let i = props.list.length - 1; i >= 0; i--) {
-      dataList.push(
-        <div key={i} role="button" tabIndex={0} onKeyDown={() => {}} onClick={() => changeId(i)}>
-          {'작전명: ' + props.list[i]}
-        </div>,
+    props.list.forEach((block, blockId) => {
+      dataList.unshift(
+        <ListItem
+          key={blockId}
+          blockId={blockId}
+          opName={selectMenuArray[blockId][0]}
+          opDay={convertToDate(selectMenuArray[blockId][1])}
+        />,
       );
-    }
+    });
+
     return (
       <div className="content record-right">
         <div className="title">작전 보고서 목록</div>
@@ -39,10 +65,7 @@ const Record = () => {
       <div className="content-deco-1" />
       <div className="content-deco-2" />
       <div className="content record-left">
-        <div className="record-title">
-          <p>AUTHORIZED ONLY</p>
-          <p>RESTRICTED INFORMATION</p>
-        </div>
+        <div className="record-title">{props.operationName}</div>
         <div className="record-author">
           <p>총책임자 : {props.kaltsitText}</p>
           <p>현장지휘관 : {props.drName}</p>
@@ -51,7 +74,7 @@ const Record = () => {
           <p>작전일자 : {props.date}</p>
         </div>
         <div className="content record-info">
-          <div className="title record-info">{props.operationName}</div>
+          <div className="title record-info">{props.opText}</div>
           <div className="record-opnumber">{props.num}</div>
           <div className="data-record-info">{_id === -1 ? <WarningMsg /> : <div />}</div>
         </div>
@@ -70,8 +93,9 @@ const Record = () => {
   RecordMenu.defaultProps = {
     kaltsitText: '■■■■■■■■',
     drName: '■■■■■■■■',
-    date: '■■■■-■■-■■',
-    operationName: 'CENSORED',
+    date: '■■■■■■■■■■',
+    opText: 'CENSORED',
+    operationName: 'AUTHORIZED ONLY\nRESTRICTED INFORMATION',
     num: 'CENSORED',
     restrictText: 'CENSORED',
     scoreText: 'CENSORED',
@@ -94,10 +118,15 @@ const Record = () => {
       {_id !== -1 ? (
         <RecordMenu
           kaltsitText="켈시"
-          drName={data[_id]['default']['name']}
-          date="아직 미구현"
-          operationName={data[_id]['default']['title']}
-          num="아직 미구현"
+          drName={_.get(records[_id], 'default.name')}
+          date={convertToDate(_.get(records[_id], 'created_at'))}
+          opText="출전했던 오퍼레이터들"
+          operationName=<div
+            style={{ display: 'table-cell', fontSize: '36px', verticalAlign: 'middle' }}
+          >
+            {_.get(records[_id], 'default.title')}
+          </div>
+          num={'총원 ' + _.get(records[_id], 'default.operatorLimit') + '명'}
           restrictText="적용했던 제약"
           scoreText="점수"
           score="미구현"

@@ -347,10 +347,10 @@ footer {
   grid-area: title;
   margin-left: 20px;
   font-family: "Apple SD Gothic Neo", "Noto Sans KR";
-  font-weight: 600;
-  font-size: 26px;
-  display: table-cell;
-  overflow: visible;
+  font-weight: 800;
+  font-size: 24px;
+  display: table;
+  overflow: hidden;
 }
 
 .record-author {
@@ -382,6 +382,8 @@ footer {
 
 .title.record-info {
   text-align: left;
+  height: 40px;
+  overflow: hidden;
 }
 
 .record-opnumber {
@@ -454,19 +456,16 @@ footer {
 
 .data-record-list::-webkit-scrollbar { width: 8px; }
 
-.data-record-list div {
+.list-block {
   position: relative;
-  font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-  font-weight: 400;
   border: 2px solid var(--white-line-color);
   padding: 3px;
-  font-size: 20px;
   cursor: pointer;
   height: 50px;
   transition: 0.3s;
 }
 
-.data-record-list div:before {
+.list-block:before {
   content: '';
   position: absolute;
   top: 0;
@@ -478,8 +477,22 @@ footer {
   background: linear-gradient(to right, var(--white-line-color) 40%, transparent 100%);
 }
 
-.data-record-list div:hover:before {
+.list-block:hover:before {
   opacity: 1;
+}
+
+.op-name {
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.op-date {
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  text-align: right;
+  color: var(--white-radio-color);
 }
 
 /* 도움말 CSS */

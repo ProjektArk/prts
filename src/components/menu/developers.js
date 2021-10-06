@@ -9,11 +9,6 @@ const developers = [
   },
   {
     job: 'Web Developer',
-    name: 'Tenebris',
-    contact: { gallog: '', youtube: '', twitter: '', facebook: '', email: '' },
-  },
-  {
-    job: 'Web Developer',
     name: '노예1호',
     contact: {
       gallog: 'https://gallog.dcinside.com/curykula',
@@ -21,6 +16,17 @@ const developers = [
       twitter: 'asdf',
       facebook: 'asdf',
       email: 'asdf',
+    },
+  },
+  {
+    job: 'Web Developer',
+    name: 'wzrabbit',
+    contact: {
+      gallog: 'https://gallog.dcinside.com/example_address',
+      youtube: '',
+      twitter: '',
+      facebook: '',
+      email: '',
     },
   },
   {
