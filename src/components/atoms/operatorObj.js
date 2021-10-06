@@ -3,9 +3,8 @@ import _ from 'lodash';
 import React from 'react';
 import positions from '../../static/database/master/positions.json';
 import { getRestrictScore } from '../static';
-import Image from './img';
 
-const Operator = (props) => {
+const OperatorObj = (props) => {
   const { operator, onMouseEnter, ...otherProps } = props;
   return (
     <StyledOperator
@@ -74,4 +73,4 @@ const StyledOperator = styled.div`
   }
 `;
 
-export default Operator;
+export default OperatorObj;

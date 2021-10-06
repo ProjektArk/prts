@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Box, { BoxItem } from '../../../atoms/box';
 import { InputTextWithSearchMark } from '../../../atoms/input';
 import { ButtonGroup, ButtonWithOrder } from '../../../atoms/button';
-import Operator from '../../../atoms/operator';
+import OperatorObj from '../../../atoms/operatorObj';
 import RestrictObj from '../../../atoms/restrictObj';
 import operatorsData from '../../../../static/database/master/operators.json';
 import restrictsData from '../../../../static/database/master/restricts.json';
@@ -111,7 +111,7 @@ const Restrict = (props) => {
                 <hr />
                 <div className="mt_3" style={{ height: '90%', overflowY: 'auto' }}>
                   {getExpectedOpers().map((operator_id) => (
-                    <Operator
+                    <OperatorObj
                       key={operator_id}
                       operator={operatorsMaster.find(
                         (operator) => operator.get('id') == operator_id,
@@ -188,7 +188,7 @@ const Restrict = (props) => {
           <h3 className="t_center">금지 오퍼레이터</h3>
           <div className="mt_3" style={{ height: '80%', overflowY: 'auto' }}>
             {setting.getIn(['restrict']).map((operator_id) => (
-              <Operator
+              <OperatorObj
                 key={operator_id}
                 small
                 operator={operatorsMaster.find((operator) => operator.get('id') == operator_id)}
