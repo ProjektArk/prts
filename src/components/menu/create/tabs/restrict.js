@@ -158,12 +158,18 @@ const Restrict = (props) => {
                     restrict={restrict}
                     getExpectedOpers={getExpectedOpers}
                     onClick={(operator_ids) => {
-                      operator_ids.size > 0 &&
+                      if (operator_ids.size > 0) {
+                        const shouldUpdateRestrict = getExpectedOpers().filter((operator_id) =>
+                          mode === 'allowed'
+                            ? !operator_ids.includes(operator_id)
+                            : operator_ids.includes(operator_id),
+                        );
                         setSetting((prevState) =>
                           prevState.updateIn(['restrict'], (list) =>
-                            new Set(list.concat(operator_ids)).toList(),
+                            list.concat(shouldUpdateRestrict),
                           ),
                         );
+                      }
                     }}
                     onMouseEnter={(description) => setDescription(description)}
                   />
