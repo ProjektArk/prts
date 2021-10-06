@@ -20,7 +20,7 @@ const OperatorObj = (props) => {
       }
       {...otherProps}
     >
-      <div>
+      <div className="position">
         {_.get(
           positions.find((position) => position.id == operator.get('position_id')),
           'name',
@@ -43,21 +43,23 @@ const StyledOperator = styled.div`
   vertical-align: top;
   ${({ small }) =>
     small
-      ? 'width: 48px; min-height: 60px; max-height: 80px; font-size: 10px;'
-      : 'width: 75px; min-height: 80px; max-height: 100px; font-size: 12px;'}
-  padding: 6px;
+      ? 'width: 52px; min-height: 60px; max-height: 80px;'
+      : 'width: 75px; min-height: 80px; max-height: 100px;'}
+  margin: 6px;
   display: inline-block;
   cursor: pointer;
   border: 1px solid transparent;
   :hover {
     border: 1px solid;
   }
-  div:first-child {
-    margin-bottom: 5px;
+  .position {
+    margin-bottom: 4px;
     background-color: white;
     color: black;
     border-radius: 8px;
     padding: 0px 4px;
+    line-height: 150%;
+    ${({ small }) => (small ? 'font-size: 10px;' : 'font-size: 12px;')}
   }
   div:last-child {
     margin-top: 2px;

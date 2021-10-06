@@ -157,6 +157,7 @@ const Restrict = (props) => {
                     key={restrict.get('id')}
                     restrict={restrict}
                     getExpectedOpers={getExpectedOpers}
+                    setDescription={setDescription}
                     onClick={(operator_ids) => {
                       if (operator_ids.size > 0) {
                         const shouldUpdateRestrict = getExpectedOpers().filter((operator_id) =>
@@ -171,7 +172,6 @@ const Restrict = (props) => {
                         );
                       }
                     }}
-                    onMouseEnter={(description) => setDescription(description)}
                   />
                 ))}
               </Box>

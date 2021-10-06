@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import operatorsMaster from '../../static/database/master/operators.json';
 
 const RestrictObj = (props) => {
-  const { restrict, getExpectedOpers, onClick, onMouseEnter } = props;
+  const { restrict, getExpectedOpers, onClick, setDescription } = props;
   const [operatorMaster] = React.useState(fromJS(operatorsMaster));
 
   const getOperatorIds = React.useCallback(() => {
@@ -28,11 +28,10 @@ const RestrictObj = (props) => {
 
   return (
     <Styled
-      onMouseEnter={() =>
-        onMouseEnter(`${restrict.get('title')}
-
-  ${restrict.get('description') ? restrict.get('description') : ''}
-  `)
+      onClick={() =>
+        setDescription(`${restrict.get('name')}
+        ${restrict.get('title')}
+        ${restrict.get('description') ? restrict.get('description') : ''}`)
       }
     >
       <div className="img-div">
@@ -66,6 +65,9 @@ const Styled = styled.div`
   opacity: 0.8;
   margin: 5px;
   word-break: keep-all;
+  :hover {
+    border: 1px solid gray;
+  }
   .img-div {
     width: 50%;
     display: inline-block;
@@ -90,7 +92,6 @@ const Styled = styled.div`
     background-color: white;
     border-radius: 20px;
     color: black;
-    cursor: pointer;
   }
   .name {
     position: absolute;
