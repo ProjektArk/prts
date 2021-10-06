@@ -5,20 +5,21 @@ import cx from 'classnames';
 import styled from 'styled-components';
 import Box, { BoxItem } from '../../../atoms/box';
 import { InputTextWithSearchMark } from '../../../atoms/input';
-import QuestionMark from '../../../atoms/question-mark';
 import { ButtonGroup, ButtonWithOrder } from '../../../atoms/button';
 import Operator from '../../../atoms/operator';
 import RestrictObj from '../../../atoms/restrictObj';
 import operatorsData from '../../../../static/database/master/operators.json';
 import restrictsData from '../../../../static/database/master/restricts.json';
+import { getRestrictScore } from '../../../static';
 
 const Restrict = (props) => {
   const { setting, setSetting } = props;
   const [operatorsMaster, setOperatorsMaster] = React.useState(fromJS(operatorsData));
   const [restrictsMaster, setRestrictMaster] = React.useState(fromJS(restrictsData));
-  const [searchTab, setSearchTab] = React.useState('operator');
   const [mode, setMode] = React.useState('allowed');
+  const [searchTab, setSearchTab] = React.useState('operator');
   const [search, setSearch] = React.useState('');
+  const [description, setDescription] = React.useState('');
 
   const [order, setOrder] = React.useState(fromJS({ target: 'rarity', desc: false }));
 
@@ -33,6 +34,10 @@ const Restrict = (props) => {
     setOperatorsMaster(order.get('desc') ? result : result.reverse());
   }, [order]);
 
+  React.useEffect(() => {
+    setSetting(setting.set('score', getRestrictScore(setting.get('restrict'))));
+  }, [setSetting, setting]);
+
   const getRestricts = React.useCallback(
     () =>
       search
@@ -42,11 +47,7 @@ const Restrict = (props) => {
   );
   const getExpectedOpers = React.useCallback(() => {
     const expectedOpers = operatorsMaster
-      .filter(
-        (operator) =>
-          !setting.getIn(['restrict', 'allowed']).includes(operator.get('id')) &&
-          !setting.getIn(['restrict', 'disallowed']).includes(operator.get('id')),
-      )
+      .filter((operator) => !setting.getIn(['restrict']).includes(operator.get('id')))
       .map((operator) => operator.get('id'));
 
     return search
@@ -64,29 +65,6 @@ const Restrict = (props) => {
       : expectedOpers;
   }, [operatorsMaster, search, setting]);
 
-  const SelectedOpers = React.useCallback(
-    ({ mode }) => (
-      <Box height="40%" width="100%" long>
-        <h3 className="t_center">{mode == 'allowed' ? '지정 오퍼레이터' : '금지 오퍼레이터'}</h3>
-        <div className="mt_3" style={{ height: '80%', overflowY: 'auto' }}>
-          {setting.getIn(['restrict', mode]).map((operator_id) => (
-            <Operator
-              key={operator_id}
-              operator={operatorsMaster.find((operator) => operator.get('id') == operator_id)}
-              onClick={() =>
-                setSetting((prevState) =>
-                  prevState.updateIn(['restrict', mode], (list) =>
-                    list.filter((id) => id != operator_id),
-                  ),
-                )
-              }
-            />
-          ))}
-        </div>
-      </Box>
-    ),
-    [operatorsMaster, setSetting, setting],
-  );
   return (
     <div className="d_if w_100">
       <div style={{ height: '463px', width: '60%', paddingRight: '30px' }}>
@@ -107,7 +85,6 @@ const Restrict = (props) => {
           </StyledSearchTab>
           {searchTab === 'operator' && (
             <BoxItem long>
-              <QuestionMark move_down={-45} move_right={400} />
               <StyledTextWithSearchMark>
                 <InputTextWithSearchMark
                   className="w_50"
@@ -115,17 +92,8 @@ const Restrict = (props) => {
                   onChange={(e) => setSearch(e.target.value)}
                   reset={() => setSearch('')}
                 />
-                <ButtonGroup
-                  className="btn-group"
-                  setValue={setMode}
-                  value={mode}
-                  items={[
-                    { id: 'allowed', name: '지정 모드' },
-                    { id: 'disallowed', name: '금지 모드' },
-                  ]}
-                />
               </StyledTextWithSearchMark>
-              <Box className="mt_4 " width="92%" height="75%">
+              <Box className="mt_3 " width="92%" height="76%">
                 <div className="t_center mb_2">
                   <ButtonWithOrder id="rarity" order={order} onClick={toggleOrder}>
                     등급순
@@ -149,12 +117,15 @@ const Restrict = (props) => {
                         (operator) => operator.get('id') == operator_id,
                       )}
                       onClick={() => {
-                        setSetting((prevState) =>
-                          prevState.updateIn(['restrict', mode], (list) =>
-                            list.includes(operator_id) ? list : list.push(operator_id),
-                          ),
-                        );
+                        setSetting((prevState) => {
+                          const list = prevState.get('restrict');
+                          const shouldUpdateRestrict = list.includes(operator_id)
+                            ? list
+                            : list.push(operator_id);
+                          return prevState.set('restrict', shouldUpdateRestrict);
+                        });
                       }}
+                      onMouseEnter={(description) => setDescription(description)}
                     />
                   ))}
                 </div>
@@ -163,7 +134,6 @@ const Restrict = (props) => {
           )}
           {searchTab === 'restrict' && (
             <BoxItem long>
-              <QuestionMark move_down={-45} move_right={400} />
               <StyledTextWithSearchMark>
                 <InputTextWithSearchMark
                   className="w_50"
@@ -181,7 +151,7 @@ const Restrict = (props) => {
                   ]}
                 />
               </StyledTextWithSearchMark>
-              <Box className="mt_4 " width="92%" height="75%">
+              <Box className="mt_3" width="92%" height="76%">
                 {getRestricts().map((restrict) => (
                   <RestrictObj
                     key={restrict.get('id')}
@@ -190,12 +160,12 @@ const Restrict = (props) => {
                     onClick={(operator_ids) => {
                       operator_ids.size > 0 &&
                         setSetting((prevState) =>
-                          prevState.updateIn(['restrict', mode], (list) => {
-                            const result = new Set(list.concat(operator_ids));
-                            return result.toList();
-                          }),
+                          prevState.updateIn(['restrict'], (list) =>
+                            new Set(list.concat(operator_ids)).toList(),
+                          ),
                         );
                     }}
+                    onMouseEnter={(description) => setDescription(description)}
                   />
                 ))}
               </Box>
@@ -204,40 +174,51 @@ const Restrict = (props) => {
         </Box>
       </div>
       <div style={{ height: '463px', width: '40%', padding: '0px 30px' }}>
-        <SelectedOpers mode="allowed" />
+        <Box className="mb_4" height="40%" width="100%" long>
+          <h3 className="t_center">설명</h3>
+          <StyledDescription>{description}</StyledDescription>
+        </Box>
+        <Box height="40%" width="100%" long>
+          <h3 className="t_center">금지 오퍼레이터</h3>
+          <div className="mt_3" style={{ height: '80%', overflowY: 'auto' }}>
+            {setting.getIn(['restrict']).map((operator_id) => (
+              <Operator
+                key={operator_id}
+                small
+                operator={operatorsMaster.find((operator) => operator.get('id') == operator_id)}
+                onClick={() =>
+                  setSetting((prevState) =>
+                    prevState.updateIn(['restrict'], (list) =>
+                      list.filter((id) => id != operator_id),
+                    ),
+                  )
+                }
+                onMouseEnter={(description) => setDescription(description)}
+              />
+            ))}
+          </div>
+        </Box>
         <StyledButtons>
           <button
-            onClick={() =>
-              setSetting((prevState) => prevState.setIn(['restrict', 'allowed'], fromJS([])))
-            }
-          >
-            상단 초기화
-          </button>
-          <button
-            onClick={() =>
-              setSetting((prevState) =>
-                prevState
-                  .setIn(['restrict', 'allowed'], fromJS([]))
-                  .setIn(['restrict', 'disallowed'], fromJS([])),
-              )
-            }
+            onClick={() => setSetting((prevState) => prevState.setIn(['restrict'], fromJS([])))}
           >
             모두 초기화
           </button>
-          <button
-            onClick={() =>
-              setSetting((prevState) => prevState.setIn(['restrict', 'disallowed'], fromJS([])))
-            }
-          >
-            하단 초기화
-          </button>
         </StyledButtons>
-        <SelectedOpers mode="disallowed" />
       </div>
     </div>
   );
 };
-
+const StyledDescription = styled.pre`
+  margin-top: 10px;
+  height: 80%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  word-break: break-all;
+  font-size: 20px;
+  white-space: pre-line;
+  padding: 5px 20px;
+`;
 const StyledTextWithSearchMark = styled.div`
   .btn-group {
     float: right;
@@ -245,32 +226,23 @@ const StyledTextWithSearchMark = styled.div`
 `;
 const StyledButtons = styled.div`
   width: 100%;
-  padding: 15px 15px;
+  padding: 5px 15px;
   text-align: center;
   button {
     font-size: 10pt;
     line-height: 100%;
     border: 0px;
-    padding: 8px 7px;
+    padding: 8px 20px;
     cursor: pointer;
-    color: white;
+    color: black;
     font-weight: bold;
-  }
-  button:first-child {
-    border-bottom-left-radius: 20px;
-    background-color: #2196f3;
-    border-color: #2196f3;
-    margin-right: 10px;
-  }
-  button: nth-child(2) {
+    border-radius: 15px;
     background-color: gray;
     border-color: gray;
   }
-  button:last-child {
-    border-top-right-radius: 20px;
-    background-color: orange;
-    border-color: orange;
-    margin-left: 10px;
+  button:hover {
+    background-color: darkgray;
+    border-color: darkgray;
   }
 `;
 

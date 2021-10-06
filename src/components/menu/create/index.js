@@ -42,6 +42,7 @@ const Create = (props) => {
               setting={setting}
               setSetting={setSetting}
               resetSetting={resetSetting}
+              selected={selected}
               setTemp={setTemp}
             />
           </div>

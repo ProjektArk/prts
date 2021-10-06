@@ -39,6 +39,42 @@ export const ButtonWithOrder = (props) => {
     </>
   );
 };
+
+export const ButtonGenerate = (props) => (
+  <StyledGenerate className="t_center" {...props}>
+    <img src={require('../../images//icons/icon_ui/icon_ui_generate.png').default} alt="" />
+    <button>작전 생성</button>
+  </StyledGenerate>
+);
+const StyledGenerate = styled.div`
+  cursor: pointer;
+  height: 320px;
+  img {
+    width: 120px;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 100%;
+    border: 15px solid gray;
+  }
+  button {
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 25px;
+    width: 80%;
+    height: 45px;
+    border: none;
+    font-size: 18pt;
+    font-weight: bold;
+    line-height: 100%;
+  }
+  :hover button {
+    background-color: orange;
+  }
+  :hover img,
+  :hover button {
+    border-color: orange;
+  }
+`;
 const StyledButtonWithOrder = styled.button`
   background-color: gray;
   color: white;

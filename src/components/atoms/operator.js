@@ -1,11 +1,24 @@
 import styled from 'styled-components';
 import _ from 'lodash';
 import positions from '../../static/database/master/positions.json';
-const Operator = (props) => {
-  const { operator, onClick } = props;
+import { getRestrictScore } from '../static';
 
+const Operator = (props) => {
+  const { operator, onMouseEnter, ...otherProps } = props;
   return (
-    <StyledOperator onClick={onClick}>
+    <StyledOperator
+      onMouseEnter={() =>
+        onMouseEnter(`이름: ${operator.get('name')}
+          포지션: ${positions.find((position) => position.id == operator.get('position_id')).name}
+          레어도: ${_.range(operator.get('rarity'))
+            .map(() => '⭐️')
+            .join('')}
+          가중치: ${operator.get('weight')}점
+          -------------------
+          총 제약점수: ${getRestrictScore([operator.get('id')])}점`)
+      }
+      {...otherProps}
+    >
       <div>
         {_.get(
           positions.find((position) => position.id == operator.get('position_id')),
@@ -26,12 +39,12 @@ const Operator = (props) => {
 
 const StyledOperator = styled.div`
   vertical-align: top;
-  width: 75px;
-  min-height: 80px;
-  max-height: 100px;
+  ${({ small }) =>
+    small
+      ? 'width: 48px; min-height: 60px; max-height: 80px; font-size: 10px;'
+      : 'width: 75px; min-height: 80px; max-height: 100px; font-size: 12px;'}
   padding: 6px;
   display: inline-block;
-  font-size: 8pt;
   cursor: pointer;
   border: 1px solid transparent;
   :hover {
@@ -51,10 +64,10 @@ const StyledOperator = styled.div`
     text-align: center;
   }
   img {
-    width: 40px;
+    ${({ small }) => (small ? 'width: 30px;' : 'width: 40px;')}
   }
   .name {
-    font-size: 11pt;
+    ${({ small }) => (small ? 'font-size: 10px;' : 'font-size: 12px;')}
   }
 `;
 

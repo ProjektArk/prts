@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import operatorsMaster from '../../static/database/master/operators.json';
 
 const RestrictObj = (props) => {
-  const { restrict, getExpectedOpers, onClick } = props;
+  const { restrict, getExpectedOpers, onClick, onMouseEnter } = props;
   const [operatorMaster] = React.useState(fromJS(operatorsMaster));
 
   const getOperatorIds = React.useCallback(() => {
@@ -27,7 +27,13 @@ const RestrictObj = (props) => {
   }, [getExpectedOpers, operatorMaster, restrict]);
 
   return (
-    <Styled>
+    <Styled
+      onMouseEnter={() =>
+        onMouseEnter(`이름: ${restrict.get('name')}
+  ${restrict.get('description')}
+  `)
+      }
+    >
       <div className="img-div">
         <img
           src={
@@ -94,11 +100,12 @@ const Styled = styled.div`
     float: right;
     cursor: pointer;
     font-size: 8pt;
-    border-radius: 5px;
+    border-radius: 7px;
     border: 0;
-    padding: 0;
+    padding: 1px 0px;
     width: 35px;
     margin-right: 2px;
+    background-color: gray;
   }
 `;
 export default RestrictObj;
