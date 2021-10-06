@@ -37,3 +37,20 @@ export const randomTitles = [
   '프리퀀트 윈드',
   '페어웨이',
 ];
+
+export const initSetting = {
+  default: {
+    name: '',
+    operatorLimit: 1,
+    isGlobal: false,
+    map: {
+      mainStory: [],
+      resource: [],
+      event: [],
+    },
+    title: '',
+  },
+  restrict: { allowed: [], disallowed: [] },
+  additional: {},
+  created_at: 0,
+};

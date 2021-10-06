@@ -10,6 +10,8 @@ object-assign
   http://jedwatson.github.io/classnames
 */
 
+/*! https://mths.be/base64 v1.0.0 by @mathias | MIT license */
+
 /**
  * @license
  * Lodash <https://lodash.com/>

@@ -1,12 +1,13 @@
 import _ from 'lodash';
 import React from 'react';
 import styled from 'styled-components';
+import { useGlobal } from '../../../hooks/global';
 import Box from '../../atoms/box';
 import { InputText } from '../../atoms/input';
-import { randomTitles } from '../../static';
 
 const GenerateButtonBox = (props) => {
-  const { setting, setSetting, resetSetting, setTemp } = props;
+  const { setting, setSetting, resetSetting } = props;
+  const { setRecord } = useGlobal();
   const handleSetting = React.useCallback(
     ({ target }) => {
       const { id, value, type, checked } = target;
@@ -34,19 +35,8 @@ const GenerateButtonBox = (props) => {
       <StyledGenerate
         className="t_center"
         onClick={() => {
-          const records = JSON.parse(localStorage.getItem('records') || JSON.stringify([]));
-          records.push(
-            setting
-              .set('created_at', Date.now())
-              .updateIn(
-                ['default', 'title'],
-                (title) => title || _.get(randomTitles, _.random(randomTitles.length - 1)),
-              )
-              .toJS(),
-          );
-          localStorage.setItem('records', JSON.stringify(records));
+          setRecord(setting);
           resetSetting();
-          setTemp(records);
         }}
         style={{ height: '320px' }}
       >

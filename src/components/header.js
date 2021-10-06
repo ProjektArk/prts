@@ -2,13 +2,11 @@ import { useGlobal } from '../hooks/global';
 import MainImage from '../images';
 
 const MenuButton = (props) => {
-  const [, setGState] = useGlobal();
+  const { setMenu } = useGlobal();
   return (
     <a
       className="menu-a"
-      onClick={() =>
-        setGState((prevState) => prevState.set('menu', `/${props.to.replaceAll('/', '')}`))
-      }
+      onClick={() => setMenu(`/${props.to.replaceAll('/', '')}`)}
       {...props}
       aria-hidden
     >
