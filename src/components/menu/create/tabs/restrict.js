@@ -151,7 +151,7 @@ const Restrict = (props) => {
                   ]}
                 />
               </StyledTextWithSearchMark>
-              <Box className="mt_3" width="92%" height="76%">
+              <Box className="mt_3" width="92%" height="76%" overflowY>
                 {getRestricts().map((restrict) => (
                   <RestrictObj
                     key={restrict.get('id')}

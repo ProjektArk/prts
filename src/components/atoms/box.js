@@ -3,9 +3,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Box = (props) => {
-  const { height, width, title, children, className } = props;
+  const { height, width, title, overflowY, children, className } = props;
   return (
-    <StyledBox className={cx([className])} style={{ height, width }}>
+    <StyledBox
+      className={cx([className])}
+      style={{ height, width, overflowY: overflowY ? 'auto' : 'unset' }}
+    >
       {title && (
         <div className="t_center mb_3">
           <h1>{title}</h1>

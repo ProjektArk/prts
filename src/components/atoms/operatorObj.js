@@ -15,7 +15,7 @@ const OperatorObj = (props) => {
             .map(() => '⭐️')
             .join('')}
           가중치: ${operator.get('weight')}점
-          -------------------
+          ------------------
           총 제약점수: ${getRestrictScore([operator.get('id')])}점`)
       }
       {...otherProps}

@@ -29,8 +29,9 @@ const RestrictObj = (props) => {
   return (
     <Styled
       onMouseEnter={() =>
-        onMouseEnter(`이름: ${restrict.get('name')}
-  ${restrict.get('description')}
+        onMouseEnter(`${restrict.get('title')}
+
+  ${restrict.get('description') ? restrict.get('description') : ''}
   `)
       }
     >
@@ -43,11 +44,9 @@ const RestrictObj = (props) => {
         />
       </div>
       <div className="contents-div">
-        <span className="question-mark">？</span>
-        <div>
-          <span className="name">{restrict.get('name')}</span>
-        </div>
-        <div>
+        <span className="score">{restrict.get('score')}</span>
+        <div className="name">{restrict.get('name')}</div>
+        <div style={{ position: 'relative' }}>
           <button onClick={() => onClick(getOperatorIds())}>선택</button>
         </div>
       </div>
@@ -56,9 +55,9 @@ const RestrictObj = (props) => {
 };
 
 const Styled = styled.div`
-  width: 105px;
-  height: 54px;
-  padding: 4px 8px 10px 2px;
+  width: 100px;
+  height: 52px;
+  padding: 4px 8px 4px 2px;
   display: inline-block;
   font-size: 7pt;
   border: 1px solid transparent;
@@ -75,15 +74,18 @@ const Styled = styled.div`
     height: 100%;
     width: 50%;
     display: inline-block;
+    position: relative;
   }
   .img-div img {
     width: 48px;
     padding-right: 5px;
     border-right: 1px solid gray;
   }
-  .question-mark {
-    float: right;
-    padding: 0px 2px 0px 2px;
+  .score {
+    position: absolute;
+    top: -1px;
+    right: -5px;
+    padding: 1px 4px 0px 5px;
     font-size: 3pt;
     background-color: white;
     border-radius: 20px;
@@ -91,19 +93,28 @@ const Styled = styled.div`
     cursor: pointer;
   }
   .name {
-    padding: 3px 0px 3px 12px;
+    position: absolute;
+    top: 16px;
+    left: 12px;
     font-size: 3pt;
     float: right;
+    width: 40px;
+    height: 30px;
     text-align: center;
+    line-height: 100%;
+    word-break: break-all;
+    cursor: default;
   }
   button {
-    float: right;
+    position: absolute;
+    top: 38px;
+    right: -6px;
     cursor: pointer;
     font-size: 8pt;
     border-radius: 7px;
     border: 0;
     padding: 1px 0px;
-    width: 35px;
+    width: 40px;
     margin-right: 2px;
     background-color: gray;
   }
