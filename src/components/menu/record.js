@@ -8,6 +8,27 @@ import positions from '../../static/database/master/positions.json';
 const Record = () => {
   const { records } = useGlobal();
   const [_id, setId] = useState(-1);
+  // 임시 오류 체크 코드
+  if (_id !== -1) {
+    const error = (errorCode) => {
+      setId(-1);
+      alert(
+        '"미안하군, 박사. 작전 기록 데이터에 오류가 있어서 데이터를 불러오는 데 실패했다. 만약 데이터를 임의로 조작한 것이 아니라면, ARK 시스템을 관리하고 있는 개발자들에게 문의해 주겠나?"\n\n-- 오류 코드는 [ 그런건가-' +
+          errorCode +
+          ' ] (이)다.\n\n- 닥터 켈시',
+      );
+    };
+    let errorCode;
+    console.log('Test', _.get(records[_id], 'operators'));
+    if (records[_id] === null) {
+      error(0);
+    }
+
+    let a = _.get(records[_id], 'operators');
+    a.forEach((data, index) => {
+      if (!Number.isInteger(data) || data < 1 || data > 189) error(1);
+    });
+  }
 
   const convertToDate = (data) => {
     const date = new Date(data);
