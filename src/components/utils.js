@@ -24,7 +24,8 @@ export const applyStyleProps = (props) => {
 
 export const getRemainTimer = () => {
   const japanStandardTime = new Date().toLocaleString({ timeZone: 'Asia/Tokyo' });
-  const time = japanStandardTime.slice(-8).split(':');
+
+  const time = japanStandardTime.replace("'", '').slice(-8).split(':');
   const remainHour = 23 - Number(_.get(time, 0));
   const remainMinute = 59 - Number(_.get(time, 1));
   const remainSecond = 59 - Number(_.get(time, 2));
