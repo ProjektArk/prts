@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import _ from 'lodash';
 import warninglogo from '../../images/icons/icon_ui/icon_ui_warning-bg.png';
 import { useGlobal } from '../../hooks/global';
+import operators from '../../static/database/master/operators.json';
+import positions from '../../static/database/master/positions.json';
 
 const Record = () => {
   const { records } = useGlobal();
@@ -60,35 +62,75 @@ const Record = () => {
     );
   };
 
-  const RecordMenu = (props) => (
-    <>
-      <div className="content-deco-1" />
-      <div className="content-deco-2" />
-      <div className="content record-left">
-        <div className="record-title">{props.operationName}</div>
-        <div className="record-author">
-          <p>총책임자 : {props.kaltsitText}</p>
-          <p>현장지휘관 : {props.drName}</p>
-        </div>
-        <div className="record-date">
-          <p>작전일자 : {props.date}</p>
-        </div>
-        <div className="content record-info">
-          <div className="title record-info">{props.opText}</div>
-          <div className="record-opnumber">{props.num}</div>
-          <div className="data-record-info">{_id === -1 ? <WarningMsg /> : <div />}</div>
-        </div>
-        <div className="content record-restriction">
-          <div className="title">{props.restrictText}</div>
-          <div className="data-record-restriction"></div>
-        </div>
-        <div className="content record-score">
-          <div className="title">{props.scoreText}</div>
-          <div className="data-record-score">{props.score}</div>
+  const RecordMenu = (props) => {
+    const OpItem = (props) => (
+      <div className="op-item">
+        <div className="op-class">{positions.find((opid) => opid.id == props.opPosition).name}</div>
+        <img className="op-image" src={props.opThumbnail} alt={props.opName} />
+        <div className="op-star">{'★★★★★★'.slice(0, props.opRarity)}</div>
+        <div className={'op-blur r' + props.opRarity}></div>
+        <div className="op-label">{props.opName}</div>
+      </div>
+    );
+
+    let opDataList = [].slice.call(_.get(records[_id], 'operators') || {});
+    opDataList.forEach((data, index) => {
+      opDataList[index] = operators.find((operator) => operator.id == data);
+    });
+    opDataList.sort((a, b) => b.rarity - a.rarity);
+    console.log(opDataList);
+    opDataList.forEach((data, index) => {
+      opDataList[index] = (
+        <OpItem
+          key={index}
+          opThumbnail={require('../../images/icons/icon_cha/' + data.thumbnail).default}
+          opName={data.name}
+          opPosition={data.position_id}
+          opRarity={data.rarity}
+        />
+      );
+    });
+
+    const WarningMsg = () => (
+      <div className="warning-msg">
+        <img className="warning-image" src={warninglogo} alt="경고 메시지" />
+        <div className="warning-text">
+          <p>박사, 작전 기록 열람을 허가한다.</p>
+          <p>우측의 보고서 목록을 클릭하여 확인하도록.</p>
+          <p>- Dr. 켈시</p>
         </div>
       </div>
-    </>
-  );
+    );
+    return (
+      <>
+        <div className="content-deco-1" />
+        <div className="content-deco-2" />
+        <div className="content record-left">
+          <div className="record-title">{props.operationName}</div>
+          <div className="record-author">
+            <p>총책임자 : {props.kaltsitText}</p>
+            <p>현장지휘관 : {props.drName}</p>
+          </div>
+          <div className="record-date">
+            <p>작전일자 : {props.date}</p>
+          </div>
+          <div className="content record-info">
+            <div className="title record-info">{props.opText}</div>
+            <div className="record-opnumber">{props.num}</div>
+            <div className="data-record-info">{_id === -1 ? <WarningMsg /> : opDataList}</div>
+          </div>
+          <div className="content record-restriction">
+            <div className="title">{props.restrictText}</div>
+            <div className="data-record-restriction"></div>
+          </div>
+          <div className="content record-score">
+            <div className="title">{props.scoreText}</div>
+            <div className="data-record-score">{props.score}</div>
+          </div>
+        </div>
+      </>
+    );
+  };
 
   RecordMenu.defaultProps = {
     kaltsitText: '■■■■■■■■',
@@ -101,17 +143,6 @@ const Record = () => {
     scoreText: 'CENSORED',
     score: '■■■',
   };
-
-  const WarningMsg = () => (
-    <div className="warning-msg">
-      <img className="warning-image" src={warninglogo} alt="경고 메시지" />
-      <div className="warning-text">
-        <p>박사, 작전 기록 열람을 허가한다.</p>
-        <p>우측의 보고서 목록을 클릭하여 확인하도록.</p>
-        <p>- Dr. 켈시</p>
-      </div>
-    </div>
-  );
 
   return (
     <>
@@ -129,7 +160,7 @@ const Record = () => {
           num={'총원 ' + _.get(records[_id], 'default.operatorLimit') + '명'}
           restrictText="적용했던 제약"
           scoreText="점수"
-          score="미구현"
+          score={_.get(records[_id], 'score') + '점'}
         />
       ) : (
         <RecordMenu />
