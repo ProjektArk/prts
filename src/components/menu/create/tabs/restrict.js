@@ -10,7 +10,7 @@ import OperatorObj from '../../../atoms/operatorObj';
 import RestrictObj from '../../../atoms/restrictObj';
 import operatorsData from '../../../../static/database/master/operators.json';
 import restrictsData from '../../../../static/database/master/restricts.json';
-import { getRestrictScore } from '../../../static';
+import { getRestrictScore } from '../../../utils';
 
 const Restrict = (props) => {
   const { setting, setSetting } = props;
@@ -181,7 +181,7 @@ const Restrict = (props) => {
       </div>
       <div style={{ height: '463px', width: '40%', padding: '0px 30px' }}>
         <Box className="mb_4" height="40%" width="100%" long>
-          <h3 className="t_center">설명</h3>
+          <h3 className="t_center">정보</h3>
           <StyledDescription>{description}</StyledDescription>
         </Box>
         <Box height="40%" width="100%" long>

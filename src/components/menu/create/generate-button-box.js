@@ -55,7 +55,7 @@ const GenerateButtonBox = (props) => {
         </StyledBox>
       )}
       {selected == 2 && (
-        <StyledBox title="제약 점수">
+        <StyledBox title="작전 위험성 평가">
           <span>{setting.get('score')}</span>
         </StyledBox>
       )}

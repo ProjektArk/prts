@@ -1,6 +1,3 @@
-import _ from 'lodash';
-import operatorData from '../static/database/master/operators.json';
-
 export const randomTitles = [
   '에델바이스',
   '이베리아 회랑',
@@ -66,15 +63,4 @@ export const rarityScore = {
   4: 10,
   5: 15,
   6: 21,
-};
-
-export const getRestrictScore = (operator_ids) => {
-  const operators = operatorData.filter((operator) => operator_ids.includes(operator.id));
-  return (
-    (operators.length > 0 &&
-      operators
-        .map((operator) => _.get(rarityScore, operator.rarity) * operator.weight)
-        .reduce((prev, current) => prev + current)) ||
-    0
-  );
 };

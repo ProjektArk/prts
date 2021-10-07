@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import _ from 'lodash';
 import React from 'react';
 import positions from '../../static/database/master/positions.json';
-import { getRestrictScore } from '../static';
+import { getRestrictScore } from '../utils';
 
 const OperatorObj = (props) => {
   const { operator, onMouseEnter, ...otherProps } = props;
