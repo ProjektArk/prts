@@ -23,11 +23,11 @@ export const applyStyleProps = (props) => {
 };
 
 export const getRemainTimer = () => {
-  const nowDate = new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }).split(' ')[1];
+  const nowDate = new Date().toLocaleString({ timeZone: 'Asia/Seoul' }).split(' ')[1];
 
   const remainHour = 23 - Number(nowDate.split(':')[0]);
-  const remainMinute = 60 - Number(nowDate.split(':')[1]);
-  const remainSecond = 60 - Number(nowDate.split(':')[2]);
+  const remainMinute = 59 - Number(nowDate.split(':')[1]);
+  const remainSecond = 59 - Number(nowDate.split(':')[2]);
 
   return `${zeroFill(remainHour)}:${zeroFill(remainMinute)}:${zeroFill(remainSecond)}`;
 };
