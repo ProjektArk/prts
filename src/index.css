@@ -530,11 +530,39 @@ footer {
   position: relative;
   width: 100%;
   margin-top: 10px;
-  height: 435px;
+  height: 380px;
   overflow: auto;
 }
 
 .data-record-list::-webkit-scrollbar, .data-record-info::-webkit-scrollbar { width: 8px; }
+
+.delete-menu {
+  width: calc(100% - 20px);
+  padding: 10px;
+  height: 50px;
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+}
+
+.delete-this, .delete-all {
+  display: inline-block;
+  width: 110px;
+  height: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: 2px solid var(--white-line-color);
+  border-radius: 10px;
+  cursor: pointer;
+  vertical-align: center;
+  white-space: nowrap;
+  transition: 0.3s;
+}
+
+.delete-this:hover, .delete-all:hover {
+  border: 2px solid white;
+  background-color: var(--white-line-color);
+}
 
 .list-block {
   position: relative;

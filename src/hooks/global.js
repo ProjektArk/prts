@@ -15,6 +15,15 @@ export const GlobalProvider = ({ children }) => {
     localStorage.removeItem('records');
     setGState((p) => p.set('records', []));
   };
+  const removeRecord = (before, index) => {
+    if (index === -1) {
+      alert('지울 작전을 먼저 선택해라, 박사.\n\n-- 닥터 켈시');
+      return;
+    }
+    before.splice(index, 1);
+    localStorage.setItem('records', JSON.stringify(before));
+    setGState((p) => p.set('records', before));
+  };
   const setRecord = (record) => {
     const records = JSON.parse(localStorage.getItem('records') || JSON.stringify([]));
     records.push(
@@ -35,7 +44,9 @@ export const GlobalProvider = ({ children }) => {
     setGState((p) => p.set('records', records));
   }, []);
   return (
-    <GlobalContext.Provider value={{ ...gState.toJS(), setMenu, setRecord, removeAllRecords }}>
+    <GlobalContext.Provider
+      value={{ ...gState.toJS(), setMenu, setRecord, removeAllRecords, removeRecord }}
+    >
       {children}
     </GlobalContext.Provider>
   );

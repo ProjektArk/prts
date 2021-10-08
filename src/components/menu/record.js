@@ -4,9 +4,12 @@ import warninglogo from '../../images/icons/icon_ui/icon_ui_warning-bg.png';
 import { useGlobal } from '../../hooks/global';
 import operators from '../../static/database/master/operators.json';
 import positions from '../../static/database/master/positions.json';
+import restricts from '../../static/database/master/restricts.json';
 
 const Record = () => {
-  const { records } = useGlobal();
+  let { records } = useGlobal();
+  const { removeAllRecords } = useGlobal();
+  const { removeRecord } = useGlobal();
   const [_id, setId] = useState(-1);
   // 임시 오류 체크 코드
   if (_id !== -1) {
@@ -19,7 +22,6 @@ const Record = () => {
       );
     };
     let errorCode;
-    console.log('Test', _.get(records[_id], 'operators'));
     if (records[_id] === null) {
       error(0);
     }
@@ -79,6 +81,35 @@ const Record = () => {
       <div className="content record-right">
         <div className="title">작전 보고서 목록</div>
         <div className="data-record-list">{dataList}</div>
+        <div className="delete-menu">
+          <div
+            className="delete-this"
+            onClick={() => {
+              let current = [].slice.call(records) || {};
+              removeRecord(current, _id);
+              setId(-1);
+            }}
+            aria-hidden
+          >
+            해당 작전 삭제
+          </div>
+          <div
+            className="delete-all"
+            onClick={() => {
+              if (
+                confirm(
+                  '정말 모든 작전 기록을 삭제할 건가? 한 번 삭제하면 되돌릴 수 없다. 신중히 결정하도록.\n모든 작전 기록을 삭제하겠다면, [ 확인 ] 을 클릭해라.\n\n-- 닥터 켈시',
+                )
+              ) {
+                removeAllRecords();
+                setId(-1);
+              }
+            }}
+            aria-hidden
+          >
+            모든 작전 삭제
+          </div>
+        </div>
       </div>
     );
   };
@@ -99,7 +130,6 @@ const Record = () => {
       opDataList[index] = operators.find((operator) => operator.id == data);
     });
     opDataList.sort((a, b) => b.rarity - a.rarity);
-    console.log(opDataList);
     opDataList.forEach((data, index) => {
       opDataList[index] = (
         <OpItem
@@ -111,6 +141,20 @@ const Record = () => {
         />
       );
     });
+
+    /*let opRestList = [].slice.call(_.get(records[_id], 'operators') || {});
+    opRestList.forEach((data, index) => {
+      opRestList[index] = operators.find((operator) => operator.id == data);
+    });
+    opRestList.forEach((data, index) => {
+      opRestList[index] = (
+        <RestItem
+          key={index}
+          opThumbnail={require('../../images/icons/icon_cha/' + data.thumbnail).default}
+          opRest=
+        />
+      );
+    });*/
 
     const WarningMsg = () => (
       <div className="warning-msg">
