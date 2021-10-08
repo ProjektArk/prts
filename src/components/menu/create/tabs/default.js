@@ -71,7 +71,7 @@ const Default = (props) => {
 
   return (
     <div className="d_if w_100">
-      <div style={{ height: '470px', width: '55%', paddingRight: '20px' }}>
+      <div style={{ height: '474px', width: '55%', paddingRight: '20px' }}>
         <Box height="26%" width="100%" className="mb_4 d_if">
           <BoxItem title="당신의 이름은?">
             <InputText
@@ -148,7 +148,7 @@ const Default = (props) => {
           </BoxItem>
         </Box>
       </div>
-      <div style={{ height: '463px', width: '45%', padding: '0px 15px 0px 25px' }}>
+      <div style={{ height: '474px', width: '45%', padding: '0px 15px 0px 25px' }}>
         <Box height="100%" width="100%" title="작전 설정">
           <BoxItem long>
             <div className="h_100 w_100 t_center">

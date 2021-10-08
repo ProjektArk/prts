@@ -67,7 +67,7 @@ const Restrict = (props) => {
 
   return (
     <div className="d_if w_100">
-      <div style={{ height: '463px', width: '55%', paddingRight: '20px' }}>
+      <div style={{ height: '474px', width: '55%', paddingRight: '20px' }}>
         <Box height="100%" width="100%" className="d_if">
           <StyledSearchTab>
             <button
@@ -179,7 +179,7 @@ const Restrict = (props) => {
           )}
         </Box>
       </div>
-      <div style={{ height: '463px', width: '45%', padding: '0px 15px 0px 25px' }}>
+      <div style={{ height: '474px', width: '45%', padding: '0px 15px 0px 25px' }}>
         <Box className="mb_4" height="40%" width="100%" long>
           <h3 className="t_center">정보</h3>
           <StyledDescription>{description}</StyledDescription>

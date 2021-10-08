@@ -45,8 +45,6 @@ const Create = () => {
             />
           </div>
         </div>
-        <h3 className="mt_4">디버깅 / 개발 편의를 위한 데이터 바인딩 상태 확인 ↓</h3>
-        <span>{JSON.stringify(setting.toJS())}</span>
       </div>
     </>
   );
