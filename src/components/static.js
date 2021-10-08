@@ -41,7 +41,7 @@ export const randomTitles = [
 export const initSetting = {
   default: {
     name: '',
-    operatorLimit: 1,
+    operatorLimit: 12,
     isGlobal: false,
     map: {
       mainStory: [],

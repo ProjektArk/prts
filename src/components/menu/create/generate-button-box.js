@@ -37,11 +37,12 @@ const GenerateButtonBox = (props) => {
     if (subtracted.size <= setting.getIn(['default', 'operatorLimit'])) {
       subtracted.forEach((item) => randomOpers.push(item));
     } else {
-      const limit = setting.getIn(['default', 'operatorLimit']);
-      while (randomOpers.length < limit) {
-        const randomIndex = _.random(limit);
+      while (randomOpers.length < setting.getIn(['default', 'operatorLimit'])) {
+        const randomIndex = _.random(subtracted.size - 1);
         const gotRandomOper = subtracted.get(randomIndex);
-        !randomOpers.includes(gotRandomOper) && randomOpers.push(gotRandomOper);
+        if (!randomOpers.includes(gotRandomOper)) {
+          randomOpers.push(gotRandomOper);
+        }
       }
     }
 
