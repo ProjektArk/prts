@@ -1,40 +1,7 @@
 import styled from 'styled-components';
 import Img from '../atoms/img';
+import developers from '../../static/database/developers';
 
-const developers = [
-  {
-    job: 'UI / UX',
-    name: 'projekt ARK',
-    contact: { gallog: '', youtube: '', twitter: '', facebook: '', email: '' },
-  },
-  {
-    job: 'Web Developer',
-    name: '노예1호',
-    contact: {
-      gallog: 'https://gallog.dcinside.com/curykula',
-      youtube: 'https://www.youtube.com/channel/UCjFAlvXPau-MDj_LO0s1_0Q',
-      twitter: 'asdf',
-      facebook: 'asdf',
-      email: 'asdf',
-    },
-  },
-  {
-    job: 'Web Developer',
-    name: 'wzrabbit',
-    contact: {
-      gallog: 'https://gallog.dcinside.com/example_address',
-      youtube: '',
-      twitter: '',
-      facebook: '',
-      email: '',
-    },
-  },
-  {
-    job: 'Infra',
-    name: '인프라',
-    contact: { gallog: '', youtube: '', twitter: '', facebook: '', email: '' },
-  },
-];
 const Item = (props) => {
   const {
     developer: { job, name, contact },
