@@ -142,20 +142,6 @@ const Record = () => {
       );
     });
 
-    /*let opRestList = [].slice.call(_.get(records[_id], 'operators') || {});
-    opRestList.forEach((data, index) => {
-      opRestList[index] = operators.find((operator) => operator.id == data);
-    });
-    opRestList.forEach((data, index) => {
-      opRestList[index] = (
-        <RestItem
-          key={index}
-          opThumbnail={require('../../images/icons/icon_cha/' + data.thumbnail).default}
-          opRest=
-        />
-      );
-    });*/
-
     const WarningMsg = () => (
       <div className="warning-msg">
         <img className="warning-image" src={warninglogo} alt="경고 메시지" />
@@ -177,7 +163,8 @@ const Record = () => {
             <p>현장지휘관 : {props.drName}</p>
           </div>
           <div className="record-date">
-            <p>작전일자 : {props.date}</p>
+            <p>작전일자 {props.date}</p>
+            <p>작전 지역 : {props.opMap}</p>
           </div>
           <div className="content record-info">
             <div className="title record-info">{props.opText}</div>
@@ -201,6 +188,7 @@ const Record = () => {
     kaltsitText: '■■■■■■■■',
     drName: '■■■■■■■■',
     date: '■■■■■■■■■■',
+    opMap: '■■■■■■■■',
     opText: 'CENSORED',
     operationName: 'AUTHORIZED ONLY\nRESTRICTED INFORMATION',
     num: 'CENSORED',
@@ -216,6 +204,7 @@ const Record = () => {
           kaltsitText="켈시"
           drName={_.get(records[_id], 'default.name')}
           date={convertToDate(_.get(records[_id], 'created_at'))}
+          opMap={_.get(records[_id], 'choosedMap')}
           opText="출전했던 오퍼레이터들"
           operationName=<div
             style={{ display: 'table-cell', fontSize: '36px', verticalAlign: 'middle' }}

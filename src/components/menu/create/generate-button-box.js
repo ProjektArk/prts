@@ -7,6 +7,7 @@ import Box from '../../atoms/box';
 import { ButtonGenerate } from '../../atoms/button';
 import { InputText } from '../../atoms/input';
 import operators from '../../../static/database/master/operators.json';
+import maps from '../../../static/database/master/maps.json';
 
 const GenerateButtonBox = (props) => {
   const { setting, selected, setSetting, resetSetting } = props;
@@ -49,6 +50,47 @@ const GenerateButtonBox = (props) => {
     return randomOpers;
   };
 
+  const getRandomizedMap = () => {
+    const mapsId = fromJS(maps.map((m) => m.id));
+    const confirmedMapList = [];
+    let alwaysAccept = false;
+    const rule = {
+      0: setting.getIn(['default', 'map', 'mainStory']),
+      1: setting.getIn(['default', 'map', 'resource']),
+      2: setting.getIn(['default', 'map', 'event']),
+    };
+    if (rule[0].size === 0 && rule[1].size === 0 && rule[2].size === 0) alwaysAccept = true;
+
+    mapsId.forEach((currentId) => {
+      const currentData = maps.find((data) => data.id === currentId);
+      if (alwaysAccept || rule[currentData.type].includes(currentData.level))
+        confirmedMapList.push(currentData.id);
+    });
+    const randomNumber = Math.floor(Math.random() * confirmedMapList.length);
+    const choosedMapId = confirmedMapList[randomNumber];
+
+    const choosedMapData = maps.find((data) => data.id === choosedMapId);
+    const altList = {
+      0: ['1지역', '2지역', '3지역', '4지역', '5지역', '6지역', '7지역', '8지역', '9지역'],
+      1: [
+        '방어 분쇄',
+        '화물 운송',
+        '공중 위협',
+        '자원 보장',
+        '전술 연습',
+        '추풍낙엽',
+        '솔선수범',
+        '난공불락',
+        '질풍노도',
+      ],
+      2: ['기병과 사냥꾼', '파란 불꽃의 마음', '소란의 법칙', '흑야의 회고록'],
+    };
+    const choosedAlt = altList[choosedMapData.type][choosedMapData.level - 1];
+    const choosedMap = choosedMapData.name;
+
+    return `【${choosedAlt}】 ${choosedMap}`;
+  };
+
   return (
     <Styled>
       {selected == 1 && (
@@ -74,7 +116,8 @@ const GenerateButtonBox = (props) => {
         onClick={() => {
           resetSetting();
           const operators = getRandomizedOpers();
-          setRecord(setting.set('operators', operators).remove('restrict'));
+          const map = getRandomizedMap();
+          setRecord(setting.set('operators', operators).remove('restrict'), map);
           setInfoMsg('작전 기록 완료.');
         }}
       />
