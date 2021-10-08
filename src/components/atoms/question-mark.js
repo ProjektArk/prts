@@ -3,10 +3,10 @@ const QuestionMark = (props) => (
     style={{
       lineHeight: '100%',
       position: 'absolute',
-      borderRadius: '100%',
+      borderRadius: '10px',
       backgroundColor: 'white',
       color: 'black',
-      padding: '3px 2px 0px 4px',
+      padding: '1px 2px 4px 2px',
       transform: `translate(${props.move_right || 10}px, ${props.move_down || 0}px)`,
       cursor: 'pointer',
       fontWeight: 'bold',

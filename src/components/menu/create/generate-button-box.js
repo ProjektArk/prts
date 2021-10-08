@@ -64,7 +64,7 @@ const GenerateButtonBox = (props) => {
         onClick={() => {
           resetSetting();
           const operators = getRandomizedOpers();
-          setRecord(setting.set('operators', operators));
+          setRecord(setting.set('operators', operators).remove('restrict'));
         }}
       />
     </Styled>
