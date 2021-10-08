@@ -64,7 +64,7 @@ const RestrictObj = (props) => {
 };
 
 const Styled = styled.div`
-  width: 100px;
+  width: 95px;
   height: 52px;
   padding: 4px 8px 4px 2px;
   display: inline-block;
@@ -106,10 +106,10 @@ const Styled = styled.div`
   .name {
     position: absolute;
     top: 16px;
-    left: 12px;
+    left: 10px;
     font-size: 3pt;
     float: right;
-    width: 40px;
+    width: 44px;
     height: 30px;
     text-align: center;
     line-height: 100%;
