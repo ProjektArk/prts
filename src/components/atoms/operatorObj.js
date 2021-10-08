@@ -6,7 +6,7 @@ import positions from '../../static/database/master/positions.json';
 import { getRestrictScore } from '../utils';
 
 const OperatorObj = (props) => {
-  const { operator, onMouseEnter, ...otherProps } = props;
+  const { operator, onMouseEnter, readonly, ...otherProps } = props;
   return (
     <StyledOperator
       onMouseEnter={() =>
@@ -51,20 +51,23 @@ const StyledOperator = styled.div`
   vertical-align: top;
   ${({ small }) =>
     small
-      ? 'width: 60px; min-height: 60px; max-height: 80px;'
+      ? 'width: 65px; min-height: 60px; max-height: 80px;'
       : 'width: 75px; min-height: 80px; max-height: 100px;'}
   margin: 6px;
   display: inline-block;
-  cursor: pointer;
+  cursor: ${({ readonly }) => (readonly ? 'default' : 'pointer')};
   border: 1px solid transparent;
+  position: relative;
+  border-radius: 8px;
   :hover {
-    border: 1px solid;
+    border: 1px solid gray;
   }
   .position {
-    margin-bottom: 4px;
-    background-color: white;
+    width: 89%;
+    background-color: darkgray;
+    font-weight: bold;
     color: black;
-    border-radius: 8px;
+    border-radius: 6px;
     padding: 0px 4px;
     line-height: 150%;
     font-size: 11px;
@@ -77,10 +80,11 @@ const StyledOperator = styled.div`
   }
   img {
     ${({ small }) =>
-      small ? 'width: 30px; padding-bottom: 4px;' : 'width: 40px; padding-bottom: 5px;'}
+      small ? 'width: 35px; padding-bottom: 4px;' : 'width: 50px; padding-bottom: 4px;'}
   }
   .name {
-    ${({ small }) => (small ? 'font-size: 11px;' : 'font-size: 12px;')}
+    font-weight: 100;
+    ${({ small }) => (small ? 'font-size: 10px;' : 'font-size: 11px;')}
   }
   .star {
     position: relative;

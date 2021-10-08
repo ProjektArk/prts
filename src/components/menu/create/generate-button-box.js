@@ -13,9 +13,7 @@ const GenerateButtonBox = (props) => {
   const [infoMsg, setInfoMsg] = React.useState('');
   const { setRecord } = useGlobal();
 
-  React.useEffect(() => {
-    setTimeout(() => setInfoMsg(''), 5000);
-  }, [infoMsg]);
+  React.useEffect(() => setTimeout(() => setInfoMsg(''), 5000), [infoMsg]);
 
   const handleSetting = React.useCallback(
     ({ target }) => {
@@ -84,6 +82,8 @@ const GenerateButtonBox = (props) => {
 };
 const StyledInfo = styled.span`
   position: absolute;
+  font-weight: 900;
+  font-size: 15px;
   right: 0px;
   bottom: 0px;
 `;

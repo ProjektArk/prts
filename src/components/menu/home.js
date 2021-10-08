@@ -9,7 +9,7 @@ import Box from '../atoms/box';
 import { applyStyleProps, getRemainTimer } from '../utils';
 import { currentEventUrl } from '../../static/database/event';
 
-const Secret = ({ todayRecord }) => (
+const SecretCode = ({ todayRecord }) => (
   <div style={{ wordBreak: 'break-all', fontSize: '10px', lineHeight: '1.2', cursor: 'default' }}>
     {base64.encode(todayRecord.toString())}
   </div>
@@ -25,7 +25,11 @@ const Home = () => {
     fromJS(initSetting).setIn(['default', 'title'], todayString),
   );
 
+  const [infoMsg, setInfoMsg] = React.useState('');
+
   const [remainTime, setRemainTime] = React.useState(getRemainTimer());
+
+  React.useEffect(() => setTimeout(() => setInfoMsg(''), 5000), [infoMsg]);
 
   React.useEffect(() => {
     setInterval(() => setRemainTime(getRemainTimer()), 1000);
@@ -66,7 +70,7 @@ const Home = () => {
                     src={`${currentEventUrl.replace('/watch?v=', '/embed/')}?mute=1`}
                     title="YouTube video player"
                     frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; mute;"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
                     allowFullScreen
                   />
                 </Box>
@@ -94,7 +98,7 @@ const Home = () => {
                   <span>&#39;작전 코드 기록&#39;</span> 버튼을 눌러 수령하고,
                   <span>작전기록</span> 에서 자세한 사항을 확인해주십시오.
                 </div>
-                <Secret todayRecord={todayRecord} />
+                <SecretCode todayRecord={todayRecord} />
               </StyledDiv>
             </StyledContents>
           </TableCell>
@@ -107,10 +111,16 @@ const Home = () => {
                 {remainTime}
               </StyledDiv>
               <StyledDiv display="inline-block">
-                <StyledRecordButton onClick={() => setRecord(todayRecord)}>
+                <StyledRecordButton
+                  onClick={() => {
+                    setRecord(todayRecord);
+                    setInfoMsg('작전 기록 완료.');
+                  }}
+                >
                   작전 코드 기록 ▶
                 </StyledRecordButton>
               </StyledDiv>
+              <StyledInfo>{infoMsg}</StyledInfo>
               <StyledDiv font-size="12px" padding="10px" bottom="0" position="absolute">
                 <hr style={{ marginBottom: '5px' }} />
                 *얼럿 시뮬레이터는 긴급 상황을 가정하여 진행하는 모의 작전입니다. 주어진 조건과 환경
@@ -123,6 +133,14 @@ const Home = () => {
     </Table>
   );
 };
+const StyledInfo = styled.span`
+  position: absolute;
+  font-weight: 900;
+  font-size: 15px;
+  bottom: 50px;
+  right: 50px;
+  color: white;
+`;
 const StyledRecordButton = styled.button`
   height: 45px;
   line-height: 100%;
