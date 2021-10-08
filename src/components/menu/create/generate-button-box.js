@@ -10,7 +10,12 @@ import operators from '../../../static/database/master/operators.json';
 
 const GenerateButtonBox = (props) => {
   const { setting, selected, setSetting, resetSetting } = props;
+  const [infoMsg, setInfoMsg] = React.useState('');
   const { setRecord } = useGlobal();
+
+  React.useEffect(() => {
+    setTimeout(() => setInfoMsg(''), 5000);
+  }, [infoMsg]);
 
   const handleSetting = React.useCallback(
     ({ target }) => {
@@ -65,11 +70,18 @@ const GenerateButtonBox = (props) => {
           resetSetting();
           const operators = getRandomizedOpers();
           setRecord(setting.set('operators', operators).remove('restrict'));
+          setInfoMsg('작전 기록 완료.');
         }}
       />
+      {infoMsg && <StyledInfo>{infoMsg}</StyledInfo>}
     </Styled>
   );
 };
+const StyledInfo = styled.span`
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+`;
 const StyledBox = styled(Box)`
   ${({ long }) => (long ? 'height: 465px;' : 'height: 150px;')}
   width: 88%;
@@ -79,6 +91,7 @@ const StyledBox = styled(Box)`
   }
 `;
 const Styled = styled.div`
+  position: relative;
   padding-left: 30px;
 `;
 
