@@ -25,13 +25,14 @@ const GenerateButtonBox = (props) => {
 
   const getRandomizedOpers = () => {
     const allOperatorIds = fromJS(operators.map((operator) => operator.id));
-    const subtracted = allOperatorIds.toSet().subtract(setting.get('restrict').toSet());
+    const subtracted = allOperatorIds.toSet().subtract(setting.get('restrict').toSet()).toList();
     const randomOpers = [];
 
     const limit = setting.getIn(['default', 'operatorLimit']);
 
     while (randomOpers.length < limit) {
-      const gotRandomOper = subtracted.get(_.random(subtracted.size));
+      const randomIndex = _.random(subtracted.size);
+      const gotRandomOper = subtracted.get(randomIndex);
       !randomOpers.includes(gotRandomOper) && randomOpers.push(gotRandomOper);
     }
 
