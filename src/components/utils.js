@@ -15,7 +15,7 @@ export const getRestrictScore = (operator_ids) => {
 };
 
 export const applyStyleProps = (props) => {
-  const { children, theme, ...otherProps } = props;
+  const { ...otherProps } = props;
   const string = Object.keys(otherProps).map(
     (key) => `${key}: ${_.get(otherProps, key)} !important`,
   );

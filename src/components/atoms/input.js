@@ -48,7 +48,7 @@ const StyledTextWithSearchMark = styled.div`
     padding: 5px 10px 5px 40px;
     line-height: 100%;
     font-size: 12pt;
-    width: 45%;
+    width: 40%;
   }
   img {
     position: absolute;
