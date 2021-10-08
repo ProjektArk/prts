@@ -14,6 +14,7 @@ const OperatorObj = (props) => {
           레어도: ${_.range(operator.get('rarity'))
             .map(() => '⭐️')
             .join('')}
+          기본 코스트: ${operator.get('cost')}
           가중치: ${operator.get('weight')}점
           ------------------
           총 제약점수: ${getRestrictScore([operator.get('id')])}점`)

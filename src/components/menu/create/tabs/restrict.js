@@ -221,7 +221,7 @@ const StyledDescription = styled.pre`
   overflow-y: auto;
   overflow-x: hidden;
   word-break: break-all;
-  font-size: 20px;
+  font-size: 18px;
   white-space: pre-line;
   padding: 5px 20px;
 `;

@@ -10,19 +10,31 @@ const RestrictObj = (props) => {
   const getOperatorIds = React.useCallback(() => {
     const operatorsByPosition = getExpectedOpers().filter((operator_id) => {
       const foundOperator = operatorMaster.find((item) => item.get('id') == operator_id);
-      return foundOperator.get('position_id') == restrict.getIn(['restrict', 'position']);
+      return foundOperator.get('position_id') == restrict.getIn(['restrict', 'position_id']);
     });
     const operatorsByRarity = getExpectedOpers().filter((operator_id) => {
       const foundOperator = operatorMaster.find((item) => item.get('id') == operator_id);
       return foundOperator.get('rarity') == restrict.getIn(['restrict', 'rarity']);
     });
+    const operatorsByCostLower = getExpectedOpers().filter((operator_id) => {
+      const foundOperator = operatorMaster.find((item) => item.get('id') == operator_id);
+      return foundOperator.get('cost') < restrict.getIn(['restrict', 'costLower']);
+    });
+    const operatorsByCostUpper = getExpectedOpers().filter((operator_id) => {
+      const foundOperator = operatorMaster.find((item) => item.get('id') == operator_id);
+      return foundOperator.get('cost') >= restrict.getIn(['restrict', 'costUpper']);
+    });
+
     const operatorsByRestrict = Set.intersect([
       new Set(restrict.getIn(['restrict', 'operators'])),
       new Set(getExpectedOpers()),
     ]);
-
     return new Set(
-      operatorsByRestrict.concat(operatorsByRarity).concat(operatorsByPosition),
+      operatorsByRestrict
+        .concat(operatorsByRarity)
+        .concat(operatorsByPosition)
+        .concat(operatorsByCostLower)
+        .concat(operatorsByCostUpper),
     ).toList();
   }, [getExpectedOpers, operatorMaster, restrict]);
 
@@ -36,9 +48,7 @@ const RestrictObj = (props) => {
     >
       <div className="img-div">
         <img
-          src={
-            require('../../images/icons/icon_disadvantage/icon_disadvantage_sniperonly.png').default
-          }
+          src={require(`../../images/icons/icon_disadvantage/${restrict.get('thumbnail')}`).default}
           alt=""
         />
       </div>
