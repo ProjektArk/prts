@@ -67,12 +67,19 @@ const StyledGenerate = styled.div`
     font-weight: bold;
     line-height: 100%;
   }
+  img,
+  button {
+    transition: 0.3s;
+  }
   :hover button {
     background-color: orange;
   }
   :hover img,
   :hover button {
     border-color: orange;
+  }
+  :hover img {
+    transform: scale(1.1);
   }
 `;
 const StyledButtonWithOrder = styled.button`

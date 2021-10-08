@@ -82,9 +82,9 @@ const Default = (props) => {
               }}
               className="mt_1 mb_1"
             />
-            <h6>최대 8글자까지 가능합니다.</h6>
+            <h6 style={{ fontWeight: 200 }}>최대 8글자까지 가능합니다.</h6>
           </BoxItem>
-          <BoxItem title="결제도장" center>
+          <BoxItem title="결재도장" center>
             <BoxThumbnail item="icon_ARK.png" />
             <BoxThumbnail item="icon_donkey.png" />
             <BoxThumbnail item="icon_minaselogo.png" />
@@ -210,12 +210,13 @@ const StyledAccordion = styled.div`
     border: none;
     outline: none;
     font-size: 13pt;
+    transition: 0.3s;
   }
   button span {
     float: right;
     transform: translateY(2px);
   }
-  .active,
+  button.active,
   button:hover {
     background-color: gray;
   }

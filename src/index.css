@@ -12,6 +12,7 @@
   --rarity-3-color: rgb(42, 145, 235, 0.5);
   --rarity-2-color: rgb(168, 255, 156, 0.4);
   --rarity-1-color: rgb(200, 200, 200, 0.4);
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; /* 폰트 기본값 */
 }
 
 html, body, #root {
@@ -30,8 +31,21 @@ a {
   color: inherit;
 }
 
-input:focus {
+h6 {
+  font-weight: 200;
+}
+
+input[type=text] {
+  background-color: transparent;
+  color: white;
+  border: 2px solid var(--white-radio-color);
+  transition: 0.3s;
+}
+
+input[type=text]:focus {
+  border: 2px solid white;
   outline: none;
+  box-shadow: 0px 0px 5px solid white;
 }
 
 #extra {
