@@ -14,8 +14,14 @@ const Item = (props) => {
           {props.youtube && <Img src="icons/youtube.png" alt={props.href} />}
           {props.twitter && <Img src="icons/twitter.png" alt={props.href} />}
           {props.facebook && <Img src="icons/facebook.png" alt={props.href} />}
-          {props.email && <Img src="icons/email.png" alt={props.href} />}
         </a>
+
+        {props.email && (
+          <StyledEmail>
+            <Img src="icons/email.png" alt={props.href} />
+            <span>{props.href}</span>
+          </StyledEmail>
+        )}
       </div>
     ) : (
       <></>
@@ -52,6 +58,19 @@ const Developers = () => (
     </div>
   </>
 );
+const StyledEmail = styled.div`
+  border: 1px solid gray;
+  border-radius: 25px;
+  padding: 0px 10px !important;
+  height: 34px !important;
+  span {
+    vertical-align: top;
+    font-size: 12px;
+  }
+  img {
+    padding-bottom: 4px;
+  }
+`;
 const Styled = styled.div`
   padding: 30px 0px;
   height: 300px;
@@ -66,25 +85,21 @@ const StyledItem = styled.div`
     vertical-align: middle;
   }
   .job {
-    width: 30%;
+    width: 25%;
   }
   .name {
-    width: 20%;
+    width: 25%;
   }
   .contact {
-    width: 30%;
-    height: 40px;
-    vertical-align: middle;
+    width: 40%;
+    height: 30px;
     display: inline-block;
-    & span {
-      font-size: 15pt;
-    }
     & div {
       height: 100%;
       padding: 0;
     }
     & img {
-      width: 30px;
+      width: 20px;
       margin-right: 10px;
     }
   }
