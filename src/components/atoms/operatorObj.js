@@ -67,7 +67,7 @@ const StyledOperator = styled.div`
     border-radius: 8px;
     padding: 0px 4px;
     line-height: 150%;
-    ${({ small }) => (small ? 'font-size: 10px;' : 'font-size: 12px;')}
+    font-size: 11px;
   }
   div:last-child {
     margin-top: 2px;
@@ -80,7 +80,7 @@ const StyledOperator = styled.div`
       small ? 'width: 30px; padding-bottom: 4px;' : 'width: 40px; padding-bottom: 5px;'}
   }
   .name {
-    ${({ small }) => (small ? 'font-size: 10px;' : 'font-size: 12px;')}
+    ${({ small }) => (small ? 'font-size: 11px;' : 'font-size: 12px;')}
   }
   .star {
     position: relative;
@@ -94,6 +94,7 @@ const StyledOperator = styled.div`
       ${({ small }) =>
         small ? 'font-size: 10px; bottom: -3px;' : 'font-size: 12px; bottom: -4px;'}
     }
+    z-index: 1;
   }
   .background {
     position: relative;
