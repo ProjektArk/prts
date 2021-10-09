@@ -116,8 +116,10 @@ const GenerateButtonBox = (props) => {
         onClick={() => {
           resetSetting();
           const operators = getRandomizedOpers();
-          const map = getRandomizedMap();
-          setRecord(setting.set('operators', operators).remove('restrict'), map);
+          const opMap = getRandomizedMap();
+          setRecord(
+            setting.set('operators', operators).remove('restrict').set('choosedMap', opMap),
+          );
           setInfoMsg('작전 기록 완료.');
         }}
       />

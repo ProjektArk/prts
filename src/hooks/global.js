@@ -24,18 +24,16 @@ export const GlobalProvider = ({ children }) => {
     localStorage.setItem('records', JSON.stringify(before));
     setGState((p) => p.set('records', before));
   };
-  // 주의: 제가 record라는 매개변수를 oper로 바꿨고, 맵 정보도 저장하도록 operMap을 추가했습니다
-  // 치명적인 결과가 예상된다면 절대 main에 push하지 말아 주세요
-  const setRecord = (oper, operMap) => {
+
+  const setRecord = (record) => {
     const records = JSON.parse(localStorage.getItem('records') || JSON.stringify([]));
     records.push(
-      oper
+      record
         .updateIn(
           ['default', 'title'],
           (title) => title || _.get(randomTitles, _.random(randomTitles.length - 1)),
         )
         .set('created_at', Date.now())
-        .set('choosedMap', operMap)
         .toJS(),
     );
     localStorage.setItem('records', JSON.stringify(records));
