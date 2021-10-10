@@ -4,7 +4,6 @@ import warninglogo from '../../images/icons/icon_ui/icon_ui_warning-bg.png';
 import { useGlobal } from '../../hooks/global';
 import operators from '../../static/database/master/operators.json';
 import positions from '../../static/database/master/positions.json';
-import restricts from '../../static/database/master/restricts.json';
 
 const Record = () => {
   let { records } = useGlobal();
@@ -21,13 +20,12 @@ const Record = () => {
           ' ] (이)다.\n\n- 닥터 켈시',
       );
     };
-    let errorCode;
     if (records[_id] === null) {
       error(0);
     }
 
     let a = _.get(records[_id], 'operators');
-    a.forEach((data, index) => {
+    a.forEach((data) => {
       if (!Number.isInteger(data) || data < 1 || data > 189) error(1);
     });
   }
@@ -206,11 +204,11 @@ const Record = () => {
           date={convertToDate(_.get(records[_id], 'created_at'))}
           opMap={_.get(records[_id], 'choosedMap')}
           opText="출전했던 오퍼레이터들"
-          operationName=<div
-            style={{ display: 'table-cell', fontSize: '36px', verticalAlign: 'middle' }}
-          >
-            {_.get(records[_id], 'default.title')}
-          </div>
+          operationName={
+            <div style={{ display: 'table-cell', fontSize: '36px', verticalAlign: 'middle' }}>
+              {_.get(records[_id], 'default.title')}
+            </div>
+          }
           num={'총원 ' + _.get(records[_id], 'default.operatorLimit') + '명'}
           restrictText="적용했던 제약"
           scoreText="점수"
