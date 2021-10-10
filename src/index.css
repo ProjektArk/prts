@@ -113,7 +113,9 @@ header {
   border-bottom: 3px solid transparent;
   transition: 0.3s;
 }
-
+.menu-a.active {
+  border-bottom: 3px solid white;
+}
 .menu-a:hover {
   border-bottom: 3px solid white;
 }

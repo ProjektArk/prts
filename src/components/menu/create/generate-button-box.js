@@ -1,20 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { fromJS } from 'immutable';
-import _ from 'lodash';
 import { useGlobal } from '../../../hooks/global';
 import Box from '../../atoms/box';
 import { ButtonGenerate } from '../../atoms/button';
 import { InputText } from '../../atoms/input';
-import operators from '../../../static/database/master/operators.json';
 import maps from '../../../static/database/master/maps.json';
+import { getRandomizedOpers } from '../../utils';
 
 const GenerateButtonBox = (props) => {
   const { setting, selected, setSetting, resetSetting } = props;
   const [infoMsg, setInfoMsg] = React.useState('');
-  const { setRecord } = useGlobal();
-
-  React.useEffect(() => setTimeout(() => setInfoMsg(''), 5000), [infoMsg]);
+  const { setRecord, setMenu } = useGlobal();
 
   const handleSetting = React.useCallback(
     ({ target }) => {
@@ -26,27 +23,6 @@ const GenerateButtonBox = (props) => {
     },
     [setSetting],
   );
-
-  const getRandomizedOpers = () => {
-    const allOperatorIds = fromJS(operators.map((operator) => operator.id));
-    const subtracted = allOperatorIds.toSet().subtract(setting.get('restrict').toSet()).toList();
-
-    const randomOpers = [];
-
-    if (subtracted.size <= setting.getIn(['default', 'operatorLimit'])) {
-      subtracted.forEach((item) => randomOpers.push(item));
-    } else {
-      while (randomOpers.length < setting.getIn(['default', 'operatorLimit'])) {
-        const randomIndex = _.random(subtracted.size - 1);
-        const gotRandomOper = subtracted.get(randomIndex);
-        if (!randomOpers.includes(gotRandomOper)) {
-          randomOpers.push(gotRandomOper);
-        }
-      }
-    }
-
-    return randomOpers;
-  };
 
   const getRandomizedMap = () => {
     const mapsId = fromJS(maps.map((m) => m.id));
@@ -113,12 +89,16 @@ const GenerateButtonBox = (props) => {
       <ButtonGenerate
         onClick={() => {
           resetSetting();
-          const operators = getRandomizedOpers();
+          const operators = getRandomizedOpers(setting);
           const opMap = getRandomizedMap();
           setRecord(
             setting.set('operators', operators).remove('restrict').set('choosedMap', opMap),
           );
-          setInfoMsg('작전 기록 완료.');
+          setInfoMsg('작전 기록 완료. 3초 후 작전기록 메뉴로 이동합니다.');
+          setTimeout(() => {
+            setInfoMsg('');
+            setMenu('/record');
+          }, 3000);
         }}
       />
       {infoMsg && <StyledInfo>{infoMsg}</StyledInfo>}

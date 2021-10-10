@@ -16,7 +16,7 @@ const SecretCode = ({ todayRecord }) => (
 );
 
 const Home = () => {
-  const { setRecord } = useGlobal();
+  const { setRecord, setMenu } = useGlobal();
   const { current: today } = React.useRef(new Date());
   const { current: todayString } = React.useRef(
     `${today.getFullYear()}${today.getMonth() + 1}${`0${today.getDate()}`.slice(-2)}`,
@@ -28,8 +28,6 @@ const Home = () => {
   const [infoMsg, setInfoMsg] = React.useState('');
 
   const [remainTime, setRemainTime] = React.useState(getRemainTimer());
-
-  React.useEffect(() => setTimeout(() => setInfoMsg(''), 5000), [infoMsg]);
 
   React.useEffect(() => {
     setInterval(() => setRemainTime(getRemainTimer()), 1000);
@@ -114,7 +112,11 @@ const Home = () => {
                 <StyledRecordButton
                   onClick={() => {
                     setRecord(todayRecord);
-                    setInfoMsg('작전 기록 완료.');
+                    setInfoMsg('작전 기록 완료. 3초 후 작전기록 메뉴로 이동합니다.');
+                    setTimeout(() => {
+                      setInfoMsg('');
+                      setMenu('/record');
+                    }, 3000);
                   }}
                 >
                   작전 코드 기록 ▶

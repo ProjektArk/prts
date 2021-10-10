@@ -1,11 +1,12 @@
+import cx from 'classnames';
 import { useGlobal } from '../hooks/global';
 import MainImage from '../images';
 
 const MenuButton = (props) => {
-  const { setMenu } = useGlobal();
+  const { menu, setMenu } = useGlobal();
   return (
     <a
-      className="menu-a"
+      className={cx(['menu-a'], { active: menu == props.to })}
       onClick={() => setMenu(`/${props.to.replaceAll('/', '')}`)}
       style={props.to == '/' ? { textDecoration: 'unset' } : {}}
       {...props}
