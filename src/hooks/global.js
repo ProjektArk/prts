@@ -24,6 +24,7 @@ export const GlobalProvider = ({ children }) => {
     localStorage.setItem('records', JSON.stringify(before));
     setGState((p) => p.set('records', before));
   };
+
   const setRecord = (record) => {
     const records = JSON.parse(localStorage.getItem('records') || JSON.stringify([]));
     records.push(
