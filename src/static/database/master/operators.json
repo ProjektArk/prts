@@ -187,5 +187,6 @@
   { "id": 186, "name": "스즈란", "thumbnail": "cha_supporter_suzuran.png", "rarity": 6, "position_id": 7, "cost": 14, "weight": 4, "aliasName": ["서포터", "스즈란은 우리의 빛이라는 것을 기억해...", "빛", "리사", "우리의 비치"] },
   { "id": 187, "name": "아", "thumbnail": "cha_specialist_aak.png", "rarity": 6, "position_id": 8, "cost": 11, "weight": 2, "aliasName": ["스페셜리스트", "게이", "퍼리", "똥캐", "약팔이", "약쟁이"] },
   { "id": 188, "name": "팬텀", "thumbnail": "cha_specialist_phantom.png", "rarity": 6, "position_id": 8, "cost": 8, "weight": 4, "aliasName": ["스페셜리스트", "게이", "준식", "엄준식", "팬준식", "중2병"] },
-  { "id": 189, "name": "위디", "thumbnail": "cha_specialist_weedy.png", "rarity": 6, "position_id": 8, "cost": 19, "weight": 4, "aliasName": ["스페셜리스트", "위클뽀", "뽀드득"] }
+  { "id": 189, "name": "위디", "thumbnail": "cha_specialist_weedy.png", "rarity": 6, "position_id": 8, "cost": 19, "weight": 4, "aliasName": ["스페셜리스트", "위클뽀", "뽀드득"] },
+  { "id": 190, "name": "글래디아", "thumbnail": "cha_specialist_gladiia.png", "rarity": 6, "position_id": 8, "cost": 14, "weight": 3, "aliasName": ["스페셜리스트", "청새치"] }
 ]

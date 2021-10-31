@@ -58,17 +58,17 @@ const Header = () => {
         <Link
           src={require('../images/icons/naver.png').default}
           href="https://cafe.naver.com/arknightskor"
-          title={<span>네이버 공캎</span>}
+          title={<span>공식 팬카페</span>}
         />
         <Link
           src={require('../images/icons/dc.png').default}
           href="https://gall.dcinside.com/mgallery/board/lists?id=mibj"
-          title={<span>명갤</span>}
+          title={<span>명일방주</span>}
         />
         <Link
           src={require('../images/icons/dc.png').default}
           href="https://gall.dcinside.com/mgallery/board/lists?id=hypergryph"
-          title={<span>노인정</span>}
+          title={<span>Hypergryph</span>}
         />
       </StyledLinks>
     </header>

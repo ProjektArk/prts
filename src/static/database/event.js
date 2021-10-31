@@ -1,1 +1,1 @@
-export const currentEventUrl = 'https://www.youtube.com/watch?v=7kxjy7IerqY';
+export const currentEventUrl = 'https://www.youtube.com/watch?v=lIYO0S31Jy4';

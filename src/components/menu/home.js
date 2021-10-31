@@ -123,7 +123,7 @@ const Home = () => {
                 </StyledRecordButton>
               </StyledDiv>
               <StyledInfo>{infoMsg}</StyledInfo>
-              <StyledDiv font-size="12px" padding="10px" bottom="0" position="absolute">
+              <StyledDiv font-size="11px" padding="10px" bottom="0" position="absolute">
                 <hr style={{ marginBottom: '5px' }} />
                 *얼럿 시뮬레이터는 긴급 상황을 가정하여 진행하는 모의 작전입니다. 주어진 조건과 환경
                 내에서 반드시 작전을 완수하십시오.

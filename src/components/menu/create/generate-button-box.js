@@ -46,7 +46,7 @@ const GenerateButtonBox = (props) => {
     const choosedMapData = maps.find((data) => data.id === choosedMapId);
     const altList = {
       0: ['1지역', '2지역', '3지역', '4지역', '5지역', '6지역', '7지역', '8지역', '9지역'],
-      1: [
+      1: ['월', '화', '수', '목', '금', '토', '일', 
         '방어 분쇄',
         '화물 운송',
         '공중 위협',
